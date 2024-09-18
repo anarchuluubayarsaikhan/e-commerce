@@ -1,8 +1,12 @@
-import { UserCards } from "@/components/usercards";
+
+import { Product } from "@/components/productDash";
+
 
 export default function Home () {
   return (
-    <UserCards/>
-  );
+    <div>Hi
+      <Product />
+    </div>
+  )
 
 }
