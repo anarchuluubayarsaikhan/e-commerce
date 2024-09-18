@@ -1,14 +1,14 @@
-import { Header } from "@/components/header";
-import { Listitem } from "@/components/listitem";
+
+
+import { Product } from "@/components/productDash";
+
+
 
 export default function Home() {
   return (
-    <main>
-      <Header />
-      <div>
-        <Listitem />
-      </div>
-    </main>
-  );
+    <div>Hi
+      <Product />
+    </div>
+  )
 
 }
