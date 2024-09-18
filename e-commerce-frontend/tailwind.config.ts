@@ -27,6 +27,7 @@ const config: Config = {
   			tagGrayBg: '#ECEDF0',
   			tagLightGrayBg: '#D6D8DB',
   			borderBg: '#D6D8DB',
+			headerBlack: "#121316",
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
