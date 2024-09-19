@@ -70,7 +70,7 @@ export function Product() {
   return (
     <div>
       <div className="flex w-full">
-        <div className="max-w-56 flex flex-col gap-4 p-4 bg-slate-300">
+        <div className="max-w-56 flex flex-col gap-4 py-4 bg-slate-100">
           <div className="flex gap-2">
             <LayoutGrid className="w-6" />
             <div className="text-base font-semibold text-nowrap">
@@ -100,7 +100,7 @@ export function Product() {
             <p className="text-sm font-medium p-4 hover:font-semibold hover:border-b-2 border-black hover:cursor-pointer">Ангилал</p>
           </div>
           <div className="flex flex-col gap-6 ml-6">
-            <Button className="w-[280px] rounded-2xl text-white bg-primaryBlack ">
+            <Button className="w-[280px] rounded-xl text-base font-semibold">
               + Бүтээгдэхүүн нэмэх
             </Button>
             <Table className="flex-1">
