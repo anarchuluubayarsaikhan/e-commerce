@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
-  CarouselItem,
 } from "@/components/ui/carousel";
 
 import { Input } from "@/components/ui/input";
@@ -22,7 +21,7 @@ import { Button } from "./ui/button";
 export function ProductUpload({ open }: { open: boolean }) {
   return (
     <div className="w-full flex flex-col gap-6 bg-primaryGray">
-      <div className="grid grid-cols-2 gap-6">
+      <div className="flex gap-6">
         <div className="max-w-xl flex flex-col gap-6 p-6">
           <div className="bg-white flex flex-col gap-4 p-6 rounded-xl">
             <div className="flex flex-col gap-2 text-sm font-semibold">
@@ -90,8 +89,8 @@ export function ProductUpload({ open }: { open: boolean }) {
             </div>
           </div>
         </div>
-        <div className="max-w-xl flex flex-col gap-6 py-6 bg-primaryGray">
-          <div className="bg-white p-6 rounded-lg flex flex-col gap-4">
+        <div className="flex flex-1 flex-col gap-6 pr-6 py-6">
+          <div className="w-full bg-white p-6 rounded-lg flex flex-col gap-4">
             <Select>
               <p className="text-base font-semibold">Ерөнхий ангилал</p>
               <SelectTrigger className="w-full bg-[#D6D8DB] border-solid border border-black">
@@ -142,7 +141,7 @@ export function ProductUpload({ open }: { open: boolean }) {
           </div>
         </div>
       </div>
-      <div className="flex gap-6 justify-end px-10">
+      <div className="flex gap-6 justify-end px-10 mb-28">
         <Button variant={"outline"} className="p-6 shadow-lg"><p className="text-base font-semibold">Ноорог</p></Button>
         <Button className="p-6 shadow-lg"><p className="text-base font-semibold">Нийтлэг</p></Button>
       </div>
