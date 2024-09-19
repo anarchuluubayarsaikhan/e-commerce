@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { ProductUpload } from "./productUpload";
+import { Checkbox } from "./ui/checkbox";
 const invoices = [
   {
     invoice: "INV001",
@@ -96,36 +97,77 @@ export function Product() {
         </div>
         <div className="w-full">
           <div className="flex gap-4 py-4">
-            <p className="text-sm font-medium p-4 hover:font-semibold hover:border-b-2 border-black hover:cursor-pointer">Бүтээгдэхүүн</p>
-            <p className="text-sm font-medium p-4 hover:font-semibold hover:border-b-2 border-black hover:cursor-pointer">Ангилал</p>
+            <p className="text-sm font-medium p-4 hover:font-semibold hover:border-b-2 border-black hover:cursor-pointer">
+              Бүтээгдэхүүн
+            </p>
+            <p className="text-sm font-medium p-4 hover:font-semibold hover:border-b-2 border-black hover:cursor-pointer">
+              Ангилал
+            </p>
           </div>
           <div className="flex flex-col gap-6 ml-6">
-            <Button className="w-[280px] rounded-xl text-base font-semibold">
-              + Бүтээгдэхүүн нэмэх
+            <Button className="w-[280px] rounded-xl text-base font-semibold px-4 py-3">
+              <div className="text-base font-semibold flex gap-1 px-7 py-2">
+                <Plus /> Бүтээгдэхүүн нэмэх
+              </div>
             </Button>
             <Table className="flex-1">
-              <TableHeader>
+              <TableHeader className="border-b-2 border-[#ECEDF0 ]">
                 <TableRow>
-                  <TableHead>Invoice</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Method</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Method</TableHead>
-                  <TableHead>Amount</TableHead>
+                  <TableHead className="w-[68px]"></TableHead>
+                  <TableHead className="text-xs text-[#3F4145] font-semibold py-3 px-6 w-[156px] hover:cursor-pointer">
+                    Бүтээгдэхүүн
+                  </TableHead>
+                  <TableHead className="text-xs text-[#3F4145] font-semibold py-3 px-6 w-[214px] hover:cursor-pointer">
+                    Ангилал
+                  </TableHead>
+                  <TableHead className="text-xs text-[#3F4145] font-semibold py-3 px-6 w-[156px] hover:cursor-pointer">
+                    Үнэ
+                  </TableHead>
+                  <TableHead className="text-xs text-[#3F4145] font-semibold py-3 px-6 w-[156px] hover:cursor-pointer">
+                    Үлдэгдэл
+                  </TableHead>
+                  <TableHead className="text-xs text-[#3F4145] font-semibold py-3 px-6 w-[156px] hover:cursor-pointer">
+                    Зарагдсан
+                  </TableHead>
+                  <TableHead className="text-xs text-[#3F4145] font-semibold py-3 px-6 w-[156px] hover:cursor-pointer">
+                     Нэмсэн огноо
+                  </TableHead>
+                  <TableHead className="w-[104px]"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {invoices.map((invoice) => (
                   <TableRow key={invoice.invoice}>
-                    <TableCell>{invoice.invoice}</TableCell>
-                    <TableCell>{invoice.paymentStatus}</TableCell>
-                    <TableCell>{invoice.paymentMethod}</TableCell>
-                    <TableCell>{invoice.totalAmount}</TableCell>
-                    <TableCell>{invoice.paymentMethod}</TableCell>
-                    <TableCell>{invoice.totalAmount}</TableCell>
-                    <TableCell className="flex gap-3">
-                      <Trash2 />
-                      <Pencil />
+                    <TableCell className="w-[68px] px-6 py-4">
+                      <Checkbox />
+                    </TableCell>
+                    <TableCell className="w-[156px] px-6 py-4">
+                      <div className="flex gap-3">
+                        <div className="bg-primaryGreen rounded-full size-10"></div>
+                        <div>
+                          {invoice.invoice}
+                          <p>0001</p>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="w-[214px] px-6 py-4">
+                      {invoice.paymentStatus}
+                    </TableCell>
+                    <TableCell className="w-[156px] px-6 py-4">
+                      {invoice.totalAmount}
+                    </TableCell>
+                    <TableCell className="w-[156px] px-6 py-4">
+                      {invoice.totalAmount}
+                    </TableCell>
+                    <TableCell className="w-[156px] px-6 py-4">
+                      {invoice.totalAmount}
+                    </TableCell>
+                    <TableCell className="w-[156px] px-6 py-4">
+                      {invoice.totalAmount}
+                    </TableCell>
+                    <TableCell className="flex gap-3 p-5 w-[104px]">
+                      <Trash2 className="w-5 h-5 text-[#1C20243D] hover:text-[red] hover:cursor-pointer" />
+                      <Pencil className="w-5 h-5 text-[#1C20243D] hover:text-blue-600 hover:cursor-pointer" />
                     </TableCell>
                   </TableRow>
                 ))}
