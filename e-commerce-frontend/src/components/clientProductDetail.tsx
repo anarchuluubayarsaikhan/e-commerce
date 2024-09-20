@@ -19,7 +19,7 @@ export function ProductDetail({ open }: { open: boolean }) {
         </div>
         <div className="w-[509px] h-[521px] bg-green-400 rounded-2xl skew-y-0"></div>
       </div>
-      <div className="w-[509px] h-[521px] py-[100px] pr-[93px flex flex-col gap-4">
+      <div className="w-[509px] py-[100px] pr-[93px flex flex-col gap-4">
         <div className="w-[418px]">
           <div className="flex flex-col gap-2">
             <Button variant={"outline"} className="w-14 py-1 px-3 rounded-full">
