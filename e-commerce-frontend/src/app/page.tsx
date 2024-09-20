@@ -1,13 +1,14 @@
 
+"use client"
+import { ProductDetail } from "@/components/clientProductDetail";
 
-import { Product } from "@/components/productDash";
 
 
 
 export default function Home() {
   return (
     <div>
-      <Product />
+      <ProductDetail />
     </div>
   )
 
