@@ -110,7 +110,7 @@ export function Product() {
               Ангилал
             </p>
           </div>
-          <div className="flex flex-col gap-6 px-6 ml-6">
+          <div className="flex flex-col gap-6 pl-6 ml-6">
             <Button className="w-[280px] rounded-xl text-base font-semibold px-4 py-3">
               <div className="text-base font-semibold flex gap-1 px-7 py-2">
                 <Plus /> Бүтээгдэхүүн нэмэх
@@ -173,7 +173,7 @@ export function Product() {
                     <TableCell className="w-[156px] px-6 py-4">
                       <div className="flex gap-3">
                         <div className="bg-primaryGreen rounded-full size-10"></div>
-                        <div>
+                        <div className="flex flex-col gap-1">
                           {invoice.invoice}
                           <p>0001</p>
                         </div>

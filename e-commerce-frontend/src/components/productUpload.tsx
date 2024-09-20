@@ -137,7 +137,7 @@ export function ProductUpload({ open }: { open: boolean }) {
           <div className="bg-white p-6 flex flex-col gap-2 rounded-lg">
             <p className="text-base font-semibold">Таг</p>
             <Input placeholder="Таг нэмэх..." className="bg-[#D6D8DB] p-2 border-solid border border-black"/>
-            <p className="text-sm font-normal text-[#5E6166] mb-8">Санал болгох: Гутал , Цүнх , Эмэгтэй </p>
+            <p className="text-sm font-normal text-[#5E6166] mb-9">Санал болгох: Гутал , Цүнх , Эмэгтэй </p>
           </div>
         </div>
       </div>
