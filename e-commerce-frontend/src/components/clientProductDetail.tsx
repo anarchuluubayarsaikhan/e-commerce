@@ -1,25 +1,43 @@
-"use client"
+"use client";
 import { Heart, Star } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { Popover, PopoverContent } from "./ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { TableBody, TableCell } from "./ui/table";
 import { useState } from "react";
+import Image from "next/image";
+import image1174 from "../public/clientProductImage/image1174.png";
+import image1175 from "../public/clientProductImage/image1175.png";
+import image1176 from "../public/clientProductImage/image1176.png";
+import image1177 from "../public/clientProductImage/image1177.png";
+import image1178 from "../public/clientProductImage/image1178.png";
 
 export function ProductDetail({ open }: { open: boolean }) {
-    const [visible, SetVisible] = useState(false);
+  const [visible, SetVisible] = useState(false);
   return (
-    <div className="max-w-[1040px] mt-[52px] flex gap-5">
+    <div className="max-w-[1040px] mx-auto items-center mt-[52px] flex gap-5">
       <div className="flex gap-5">
         <div className="w-[67px] flex flex-col gap-2 py-[100px]">
-          <div className="w-[67px] h-[67px] bg-yellow-300 rounded-sm shadow-xl hover:border-2 hover:border-primaryBlack hover:scale-125"></div>
-          <div className="w-[67px] h-[67px] bg-yellow-300 rounded-sm shadow-xl hover:border-2 hover:border-primaryBlack hover:scale-125"></div>
-          <div className="w-[67px] h-[67px] bg-yellow-300 rounded-sm shadow-xl hover:border-2 hover:border-primaryBlack hover:scale-125"></div>
-          <div className="w-[67px] h-[67px] bg-yellow-300 rounded-sm shadow-xl hover:border-2 hover:border-primaryBlack hover:scale-125"></div>
+          <div className="w-[67px] h-[67px] hover:border-2 hover:border-primaryBlack hover:scale-125">
+            <Image src={image1175} alt="" className="rounded-sm shadow-xl w-full" />
+          </div>
+          <div className="w-[67px] h-[67px] hover:border-2 hover:border-primaryBlack hover:scale-125">
+            <Image src={image1176} alt="" className="rounded-sm shadow-xl" />
+          </div>
+          <div className="w-[67px] h-[67px] hover:border-2 hover:border-primaryBlack hover:scale-125">
+            <Image src={image1177} alt="" className="rounded-sm shadow-xl" />
+          </div>
+          <div className="w-[67px] h-[67px] hover:border-2 hover:border-primaryBlack hover:scale-125">
+            <Image src={image1178} alt="" className="rounded-sm shadow-xl" />
+          </div>
         </div>
-        <div className="w-[509px] h-[521px] bg-green-400 rounded-2xl skew-y-0"></div>
+        <Image
+          src={image1174}
+          alt=""
+          className="rounded-2xl shadow-2xl w-[509px] h-[521px]"
+        />
       </div>
-      <div className="w-[509px] py-[100px] pr-[93px flex flex-col gap-4">
+      <div className="w-[509px] py-[100px] flex-1 flex-col gap-4">
         <div className="w-[418px]">
           <div className="flex flex-col gap-2">
             <Button variant={"outline"} className="w-14 py-1 px-3 rounded-full">
@@ -47,7 +65,6 @@ export function ProductDetail({ open }: { open: boolean }) {
                 <span className="sr-only">White</span>
                 <span className="size-8 rounded-full border border-black border-opacity-10 bg-white"></span>
               </div> */}
-
               <Button className="w-8 h-8 rounded-full">S</Button>
               <Button
                 variant={"outline"}
@@ -95,12 +112,17 @@ export function ProductDetail({ open }: { open: boolean }) {
               Сагсанд нэмэх
             </Button>
           </div>
-          <div>
+          <Popover open={open}>
             <div className="flex gap-4">
               <p className="text-sm font-normal">Үнэлгээ</p>
-              <div className="text-sm font-normal text-primaryBlue border-b-2 border-primaryBlue w-[97px] hover:cursor-pointer" onClick={()=> SetVisible(true)}>
-                бүгдийг харах
-              </div>
+              <PopoverTrigger asChild>
+                <div
+                  className="text-sm font-normal text-primaryBlue border-b-2 border-primaryBlue w-[97px] hover:cursor-pointer"
+                  onClick={() => SetVisible(true)}
+                >
+                  бүгдийг харах
+                </div>
+              </PopoverTrigger>
             </div>
             <div>
               <div className="flex">
@@ -112,25 +134,22 @@ export function ProductDetail({ open }: { open: boolean }) {
                 <p className="w-[54px] text-sm font-normal">4.6 (24)</p>
               </div>
             </div>
-            <Popover open={open}>
-                <PopoverContent>
-                    <TableBody>
-                        <TableCell>
-                            <div>
-                                Saraa
-                                <Star />
-                            </div>
-                            <div>Ваав материал ёстой гоё  байна 😍</div>
-                        </TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                    </TableBody>
-                    
-                </PopoverContent>
-            </Popover>
-          </div>
+            <PopoverContent>
+              <TableBody>
+                <TableCell>
+                  <div>
+                    Saraa
+                    <Star />
+                  </div>
+                  <div>Ваав материал ёстой гоё байна 😍</div>
+                </TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+              </TableBody>
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
     </div>
