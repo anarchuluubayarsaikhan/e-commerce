@@ -1,10 +1,9 @@
-"use client"
-import { ProductDetail } from "@/components/clientProductDetail";
+import { Header } from "@/components/header";
+import { TableHeader } from "@/components/ui/table";
 
 export default function Home() {
   return (
-    <div>
-      <ProductDetail />
+    <div>  
     </div>
   )
 
