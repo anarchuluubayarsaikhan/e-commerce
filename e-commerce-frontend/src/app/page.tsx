@@ -1,11 +1,10 @@
-import { Header } from "@/components/header";
-import { Listitem } from "@/components/listitem";
-import { TableHeader } from "@/components/ui/table";
+"use client"
+import { ProductDetail } from "@/components/clientProductDetail";
 
 export default function Home() {
   return (
-    <div>Hi
-      <Product />
+    <div>
+      <ProductDetail />
     </div>
   )
 
