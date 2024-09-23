@@ -100,8 +100,8 @@ export function Tableheader() {
                     <Input type="email" placeholder="Дугаар, Имэйл" className="w-[300px] rounded-xl text-[#8B8E95]" />
                 </div>
             </div>
-            <div className="text-xl font-semibold ml-[60px]">Захиалга</div>
-            <Table className="ml-[105px]">
+            <div className="text-xl font-semibold ml-[50px]">Захиалга</div>
+            <Table className="ml-[35px]">
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-[100px] text-nowrap">Захиалгын ID дугаар</TableHead>
