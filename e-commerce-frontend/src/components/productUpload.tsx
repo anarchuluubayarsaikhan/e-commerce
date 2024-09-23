@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
-  CarouselItem,
 } from "@/components/ui/carousel";
 
 import { Input } from "@/components/ui/input";
@@ -21,19 +20,19 @@ import { Button } from "./ui/button";
 
 export function ProductUpload({ open }: { open: boolean }) {
   return (
-    <div className="w-full">
-      <div className="grid grid-cols-2 gap-5 bg-primaryGray">
+    <div className="w-full flex flex-col gap-6 bg-primaryGray">
+      <div className="flex gap-6">
         <div className="max-w-xl flex flex-col gap-6 p-6">
           <div className="bg-white flex flex-col gap-4 p-6 rounded-xl">
             <div className="flex flex-col gap-2 text-sm font-semibold">
               Бүтээгдэхүүний нэр
-              <Input placeholder="Нэр" className="bg-slate-100" />
+              <Input placeholder="Нэр" className="bg-[#D6D8DB] p-2 border-solid border border-black" />
             </div>
             <div className="flex flex-col gap-2 text-sm font-semibold">
               Нэмэлт мэдээлэл
               <Textarea
                 placeholder="Гол онцлог, давуу тал, техникийн үзүүлэлтүүдийг онцолсон дэлгэрэнгүй, сонирхолтой тайлбар."
-                className="max-w-lg"
+                className="max-w-lg bg-[#D6D8DB] p-2 border-solid border border-black"
               />
             </div>
             <div className="flex flex-col gap-2 text-sm font-semibold">
@@ -41,81 +40,110 @@ export function ProductUpload({ open }: { open: boolean }) {
               <Input
                 type="number"
                 placeholder="#123456"
-                className="bg-slate-100"
+                className="bg-[#D6D8DB] p-2 border-solid border border-black"
               />
             </div>
           </div>
-          <Carousel className="w-full max-w-sm">
-            <CarouselContent>
-              <CarouselItem className="pl-1">
-                <div className="p-1">
-                  <Card className="max-w-[125px] h-[125px] rounded-2xl">
-                    <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-2xl font-semibold"></span>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
+          <Carousel className="w-full max-w-xl box-border rounded-xl p-6 flex flex-col gap-4 bg-white">
+            <p className="text-lg font-semibold">Бүтээгдэхүүний зураг</p>
+            <CarouselContent className="flex gap-2">
+              <Card className="w-[125px] h-[125px] rounded-xl border-dashed border-2 ">
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-2xl font-semibold"></span>
+                </CardContent>
+              </Card>
+              <Card className="w-[125px] h-[125px] rounded-xl border-dashed border-2">
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-2xl font-semibold"></span>
+                </CardContent>
+              </Card>
+              <Card className="w-[125px] h-[125px] rounded-xl border-dashed border-2">
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-2xl font-semibold"></span>
+                </CardContent>
+              </Card>
+              <Card className="w-[125px] h-[125px] rounded-xl bg-white flex items-center justify-center">
+                <CardContent className="w-full flex items-center justify-center p-6">
+                  <Button
+                    variant={"secondary"}
+                    className="rounded-full w-[32px] h-[32px] relative"
+                  >
+                    <p className="absolute text-base font-medium">+</p>
+                    <Input type="file" className="opacity-0" />
+                  </Button>
+                </CardContent>
+              </Card>
             </CarouselContent>
           </Carousel>
-          <div className="grid grid-cols-2">
-            <Input placeholder="Үндсэн үнэ" className="bg-slate-100" />
-            <Input placeholder="Үлдэгдэл тоо ширхэг" className="bg-slate-100" />
+          <div className="grid grid-cols-2 gap-4 p-6 bg-white rounded-xl">
+            <div className="flex flex-col gap-2 text-base font-semibold">
+              Үндсэн үнэ
+              <Input placeholder="Үндсэн үнэ" className="bg-[#D6D8DB] p-2 border-solid border border-black" />
+            </div>
+            <div className="flex flex-col gap-2 text-base font-semibold">
+              Үлдэгдэл тоо ширхэг
+              <Input
+                placeholder="Үлдэгдэл тоо ширхэг"
+                className="bg-[#D6D8DB] p-2 border-solid border border-black"
+              />
+            </div>
           </div>
         </div>
-        <div className="max-w-xl flex flex-col gap-6 p-6 bg-primaryGray">
-          <Select>
-            Ерөнхий ангилал
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Сонгох" />
-            </SelectTrigger>
-            <SelectContent className="">
-              <SelectGroup>
-                <SelectItem value="apple">Apple</SelectItem>
-                <SelectItem value="banana">Banana</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select>
-            Дэд ангилал
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Сонгох" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="apple">Apple</SelectItem>
-                <SelectItem value="banana">Banana</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <div>
-            <p>Төрөл</p>
-            <div className="flex gap-2 items-center">
+        <div className="flex flex-1 flex-col gap-6 pr-6 py-6">
+          <div className="w-full bg-white p-6 rounded-lg flex flex-col gap-4">
+            <Select>
+              <p className="text-base font-semibold">Ерөнхий ангилал</p>
+              <SelectTrigger className="w-full bg-[#D6D8DB] border-solid border border-black">
+                <SelectValue placeholder="Сонгох" className=""/>
+              </SelectTrigger>
+              <SelectContent className="">
+                <SelectGroup>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <Select>
+              <p className="text-base font-semibold">Дэд ангилал</p>
+              <SelectTrigger className="w-full bg-[#D6D8DB] border-solid border border-black">
+                <SelectValue placeholder="Сонгох" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="banana">Banana</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="bg-white p-6 flex flex-col gap-6 rounded-lg">
+            <p className="text-lg font-semibold">Төрөл</p>
+            <div className="flex gap-6 items-center">
               <p>Өнгө</p>
-              <Button variant="outline" className="rounded-full">
+              <Button variant="secondary" className="rounded-full w-[32px] h-[32px]">
                 +
               </Button>
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-6 items-center">
               <p>Хэмжээ</p>
-              <Button variant="outline" className="rounded-full bg-primaryGray">
+              <Button variant="secondary" className="rounded-full w-[32px] h-[32px]">
                 +
               </Button>
             </div>
-            <Button variant="outline" className="rounded-xl bg-primaryGray">
-              Төрөл нэмэх
+            <Button variant="outline" className="rounded-xl max-w-[118px] shadow-lg">
+             <p className="text-sm font-semibold px-4 py-2">Төрөл нэмэх</p>
             </Button>
           </div>
-          <div>
-            Tag
-            <Input placeholder="Таг нэмэх..." />
-            <p>Санал болгох: Гутал , Цүнх , Эмэгтэй </p>
+          <div className="bg-white p-6 flex flex-col gap-2 rounded-lg">
+            <p className="text-base font-semibold">Таг</p>
+            <Input placeholder="Таг нэмэх..." className="bg-[#D6D8DB] p-2 border-solid border border-black"/>
+            <p className="text-sm font-normal text-[#5E6166] mb-9">Санал болгох: Гутал , Цүнх , Эмэгтэй </p>
           </div>
         </div>
       </div>
-      <div className="flex gap-6 justify-end">
-        <Button variant={"outline"}>Ноорог</Button>
-        <Button>Нийтлэг</Button>
+      <div className="flex gap-6 justify-end px-10 mb-28">
+        <Button variant={"outline"} className="p-6 shadow-lg"><p className="text-base font-semibold">Ноорог</p></Button>
+        <Button className="p-6 shadow-lg"><p className="text-base font-semibold">Нийтлэг</p></Button>
       </div>
     </div>
   );
