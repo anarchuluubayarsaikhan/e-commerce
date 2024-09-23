@@ -1,4 +1,3 @@
-
 "use client"
 import { ProductDetail } from "@/components/clientProductDetail";
 
