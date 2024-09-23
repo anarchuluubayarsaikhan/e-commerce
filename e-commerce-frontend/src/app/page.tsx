@@ -1,9 +1,12 @@
 import { Header } from "@/components/header";
-import { TableHeader } from "@/components/ui/table";
+import { Listitem } from "@/components/listitem";
+import { ProductDash } from "@/components/productDash";
 
 export default function Home() {
   return (
-    <div>  
+    <div className="max-w-[1440px] mx-auto">
+      <Header />
+      <Listitem />
     </div>
   )
 
