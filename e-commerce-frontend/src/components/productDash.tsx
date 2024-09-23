@@ -65,7 +65,7 @@ const invoices = [
   },
 ];
 
-export function Product() {
+export function ProductDash() {
   const [open, SetOpen] = useState(false);
   return (
     <div>
