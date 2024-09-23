@@ -120,60 +120,38 @@ export function ProductDetail({ open }: { open: boolean }) {
             </Button>
           </div>
           <Popover open={open}>
-            <div className="flex gap-4">
-              <p className="text-sm font-normal">Үнэлгээ</p>
+            <div className="flex flex-col gap-2">
               <PopoverTrigger asChild>
-                <div>
+                <div className="flex gap-1">
+                  <p className="text-sm font-normal">Үнэлгээ</p>
                   <div
                     className="text-sm font-normal text-primaryBlue border-b-2 border-primaryBlue w-[97px] hover:cursor-pointer"
                     onClick={() => SetVisible(true)}
                   >
                     бүгдийг харах
                   </div>
-                  <div className="flex">
-                    <Star className="size-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="size-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="size-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="size-5 fill-yellow-400 text-yellow-400" />
-                    <Star className="size-5 fill-yellow-400 text-yellow-400" />
-                    <p className="w-[54px] text-sm font-normal">4.6 (24)</p>
-                  </div>
                 </div>
               </PopoverTrigger>
-            </div>
-            {/* <div>
               <div className="flex">
-                <Star className="size-5 fill-yellow-400 text-yellow-400 border-0" />
                 <Star className="size-5 fill-yellow-400 text-yellow-400" />
                 <Star className="size-5 fill-yellow-400 text-yellow-400" />
                 <Star className="size-5 fill-yellow-400 text-yellow-400" />
-                <Star className="size-5 fill-yellow-400 opacity-50 text-yellow-400 border-0 " />
+                <Star className="size-5 fill-yellow-400 text-yellow-400" />
+                <Star className="size-5 fill-yellow-400 text-yellow-400" />
                 <p className="w-[54px] text-sm font-normal">4.6 (24)</p>
               </div>
-            </div> */}
+            </div>
             <PopoverContent className="w-full p-3">
               <TableBody className="flex flex-col gap-6">
                 <ScrollArea className="h-72 w-[300px] rounded-md border">
                   <div className="flex flex-col">
                     <TableCell>
-                      <div className="flex ">
+                      <div className="flex gap-1">
                         <p className="text-sm font-medium">Saraa</p>
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
-                      </div>
-                      <div className="text-nowrap">
-                        Ваав материал ёстой гоё байна 😍
-                      </div>
-                      <Separator className="my-2" />
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex">
-                        Saraa
-                        <Star className="size-5 fill-yellow-400 text-yellow-400" />
-                        <Star className="size-5 fill-yellow-400 text-yellow-400" />
-                        <Star className="size-5 fill-yellow-400 text-yellow-400" />
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
                       </div>
                       <div className="text-nowrap">
@@ -182,8 +160,9 @@ export function ProductDetail({ open }: { open: boolean }) {
                       <Separator className="my-2" />
                     </TableCell>
                     <TableCell>
-                      <div className="flex">
-                        Saraa
+                      <div className="flex gap-1">
+                        <p className="text-sm font-medium">Saraa</p>
+                        <Star className="size-5 fill-yellow-400 text-yellow-400" />
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
@@ -195,8 +174,23 @@ export function ProductDetail({ open }: { open: boolean }) {
                       <Separator className="my-2" />
                     </TableCell>
                     <TableCell>
-                      <div className="flex">
-                        Saraa
+                      <div className="flex gap-1">
+                        <p className="text-sm font-medium">Saraa</p>
+                        <Star className="size-5 fill-yellow-400 text-yellow-400" />
+                        <Star className="size-5 fill-yellow-400 text-yellow-400" />
+                        <Star className="size-5 fill-yellow-400 text-yellow-400" />
+                        <Star className="size-5 fill-yellow-400 text-yellow-400" />
+                        <Star className="size-5 fill-yellow-400 text-yellow-400" />
+                      </div>
+                      <div className="text-nowrap">
+                        Ваав материал ёстой гоё байна 😍
+                      </div>
+                      <Separator className="my-2" />
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-1">
+                        <p className="text-sm font-medium">Saraa</p>
+                        <Star className="size-5 fill-yellow-400 text-yellow-400" />
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
                         <Star className="size-5 fill-yellow-400 text-yellow-400" />
@@ -222,7 +216,7 @@ export function ProductDetail({ open }: { open: boolean }) {
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium">Сэтгэгдэл үлдээх:</p>
-                    <Textarea />
+                    <Textarea placeholder="Энд бичнэ үү..."/>
                   </div>
                   <Button className="bg-primaryBlue rounded-3xl w-32 font-semibold py-2 px-9 hover:bg-blue-800">
                     Үнэлэх
