@@ -1,6 +1,5 @@
 import { Header } from "@/components/header";
-import { Listitem } from "@/components/listitem";
-import { ProductDash } from "@/components/productDash";
+import { Listitem } from "@/components/sidebar";
 
 export default function Home() {
   return (
@@ -8,6 +7,5 @@ export default function Home() {
       <Header />
       <Listitem />
     </div>
-  )
-
+  );
 }

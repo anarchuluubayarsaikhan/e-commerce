@@ -5,7 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 const CategoryPage = () => {
   return (
-    <main className="max-w-[1440px] mx-auto">
+    <main>
       <ClientHeader />
       <section className="grid gap-5 grid-cols-4 max-w-[1440px] mx-auto px-5 p-16">
         <div className="block">
