@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "../e-commerce-dashboard/src/components/settings.tsx", "../e-commerce-dashboard/src/components/shoptype.tsx", "../e-commerce-dashboard/src/components/storeprofile.tsx", "../e-commerce-dashboard/src/components/successfullysaved.tsx", "../e-commerce-dashboard/src/components/search.tsx"],
   "exclude": ["node_modules"]
 }

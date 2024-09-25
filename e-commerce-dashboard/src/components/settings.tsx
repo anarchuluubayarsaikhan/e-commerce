@@ -1,4 +1,8 @@
-import { Button } from "@/components/ui/button"
+"use client"
+
+import { open } from "fs"
+import { useState } from "react"
+import { ShopType } from "./shoptype"
 
 const settings = [
     {
@@ -23,7 +27,7 @@ export function Settings() {
                 {settings.map((setting) =>
                     <div className="flex justify-between items-center border border-tagGrayBg rounded-xl py-[14px] px-3">
                         <p className="text-base font-normal text-buttonPrimary">{setting.name}</p>
-                        <button className={`text-buttonPrimary font-semibold text-sm rounded-[8px] py-2 px-4 border border-tagLightGrayBg `}>{setting.buttonname}</button> 
+                        <button className={`text-buttonPrimary font-semibold text-sm rounded-[8px] py-2 px-4 border border-tagLightGrayBg  }`}>{setting.buttonname}</button> 
                     </div>
                 )}
 
