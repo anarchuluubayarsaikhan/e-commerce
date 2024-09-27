@@ -19,24 +19,27 @@ import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { useState } from "react";
 
-// const [name, SetName] = useState("")
-const [text, SetText] = useState("")
-
 export function ProductUpload() {
+  const [name, SetName] = useState("")
+  const [text, SetText] = useState("")
+  const [BarCode, SetBarCode] = useState("")
+
   function postProduct() {
     fetch(`http://localhost:4000/postProducts`,
       {
         method: "POST",
         body: JSON.stringify({
           name: name,
-          text:text
-        })
+          text: text,
+          BarCode: BarCode,
+        }
+        ),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
       }
     )
   }
 
 
-  console.log(text)
   return (
     <div className="w-full flex flex-col gap-6 bg-primaryGray">
       <div className="flex gap-6">
@@ -58,7 +61,7 @@ export function ProductUpload() {
               <Input
                 type="number"
                 placeholder="#123456"
-                className="bg-[#D6D8DB] p-2 border-solid border border-black"
+                className="bg-[#D6D8DB] p-2 border-solid border border-black" value={BarCode} onChange={(e) => SetBarCode(e.target.value)}
               />
             </div>
           </div>
@@ -161,7 +164,7 @@ export function ProductUpload() {
       </div>
       <div className="flex gap-6 justify-end px-10 mb-28">
         <Button variant={"outline"} className="p-6 shadow-lg"><p className="text-base font-semibold">Ноорог</p></Button>
-        <Button className="p-6 shadow-lg"><p className="text-base font-semibold">Нийтлэх</p></Button>
+        <Button className="p-6 shadow-lg"><p className="text-base font-semibold" onClick={() => postProduct()}>Нийтлэх</p></Button>
       </div>
     </div>
   );
