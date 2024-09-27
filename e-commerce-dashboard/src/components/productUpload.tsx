@@ -22,7 +22,8 @@ import { useState } from "react";
 export function ProductUpload() {
   const [name, SetName] = useState("")
   const [text, SetText] = useState("")
-  const [BarCode, SetBarCode] = useState("")
+  const [barCode, SetBarCode] = useState("")
+  const [category, SetCategory] = useState("")
 
   function postProduct() {
     fetch(`http://localhost:4000/postProducts`,
@@ -31,7 +32,7 @@ export function ProductUpload() {
         body: JSON.stringify({
           name: name,
           text: text,
-          BarCode: BarCode,
+          BarCode: barCode,
         }
         ),
         headers: { "Content-type": "application/json; charset=UTF-8" }
@@ -61,7 +62,7 @@ export function ProductUpload() {
               <Input
                 type="number"
                 placeholder="#123456"
-                className="bg-[#D6D8DB] p-2 border-solid border border-black" value={BarCode} onChange={(e) => SetBarCode(e.target.value)}
+                className="bg-[#D6D8DB] p-2 border-solid border border-black" value={barCode} onChange={(e) => SetBarCode(e.target.value)}
               />
             </div>
           </div>
@@ -112,9 +113,10 @@ export function ProductUpload() {
         </div>
         <div className="flex flex-1 flex-col gap-6 pr-6 py-6">
           <div className="w-full bg-white p-6 rounded-lg flex flex-col gap-4">
-            <Select>
+            <Select onValueChange={SetCategory}>
               <p className="text-base font-semibold">Ерөнхий ангилал</p>
               <SelectTrigger className="w-full bg-[#D6D8DB] border-solid border border-black">
+                <SelectValue placeholder="Сонгох" className="" />
                 <SelectValue placeholder="Сонгох" className="" />
               </SelectTrigger>
               <SelectContent className="">
@@ -153,10 +155,12 @@ export function ProductUpload() {
             </div>
             <Button variant="outline" className="rounded-xl max-w-[118px] shadow-lg">
               <p className="text-sm font-semibold px-4 py-2">Төрөл нэмэх</p>
+              <p className="text-sm font-semibold px-4 py-2">Төрөл нэмэх</p>
             </Button>
           </div>
           <div className="bg-white p-6 flex flex-col gap-2 rounded-lg">
             <p className="text-base font-semibold">Таг</p>
+            <Input placeholder="Таг нэмэх..." className="bg-[#D6D8DB] p-2 border-solid border border-black" />
             <Input placeholder="Таг нэмэх..." className="bg-[#D6D8DB] p-2 border-solid border border-black" />
             <p className="text-sm font-normal text-[#5E6166] mb-9">Санал болгох: Гутал , Цүнх , Эмэгтэй </p>
           </div>

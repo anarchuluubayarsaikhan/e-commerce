@@ -9,7 +9,7 @@ const postProductsSchema = new Schema({
         type: String,
         required: true,
     },
-    BarCode: {
+    barCode: {
         type: Number,
         required: true,
     },

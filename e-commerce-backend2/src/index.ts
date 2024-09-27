@@ -19,11 +19,11 @@ app.get('/', (req, res) => {
 
 app.post('/postProducts', async (req: Request, res: Response) => {
   try {
-    const { name, text, BarCode } = req.body
+    const { name, text, barCode } = req.body
     const postProducts = await postProduct.create({
       name: name,
       text: text,
-      BarCode: BarCode
+      BarCode: barCode
     })
     console.log(postProducts)
     res.send(postProducts);
