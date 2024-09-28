@@ -1,13 +1,9 @@
-
-
-import { Product } from "@/components/productDash";
-
-
+import { ProductUpload } from "@/components/productUpload";
 
 export default function Home() {
   return (
-    <div>Hi
-      <Product />
+    <div>
+      <ProductUpload />
     </div>
   )
 
