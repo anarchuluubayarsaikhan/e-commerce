@@ -17,13 +17,15 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { log } from "console";
 
 export function ProductUpload() {
   const [name, SetName] = useState("")
   const [text, SetText] = useState("")
   const [barCode, SetBarCode] = useState("")
   const [category, SetCategory] = useState("")
+  const [image, SetImage] = useState<File | null>(null)
 
   function postProduct() {
     fetch(`http://localhost:4000/postProducts`,
@@ -39,6 +41,32 @@ export function ProductUpload() {
       }
     )
   }
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event?.currentTarget.files;
+    console.log(files);
+
+    if (files) {
+      SetImage(files[0]);
+    }
+  }
+  console.log(image);
+
+  function UploadFile() {
+    if (!image) return
+    const formData = new FormData()
+    formData.append("image", image)
+    fetch(`http://localhost:4000/uploadfile`,
+      {
+        method: "POST",
+        body: formData
+      }
+    ).then
+      (
+        (res) => res.json()
+      ).then((data) => console.log(data))
+  }
+
 
 
   return (
@@ -89,9 +117,10 @@ export function ProductUpload() {
                   <Button
                     variant={"secondary"}
                     className="rounded-full w-[32px] h-[32px] relative"
+
                   >
                     <p className="absolute text-base font-medium">+</p>
-                    <Input type="file" className="opacity-0" />
+                    <Input type="file" className="opacity-0" onChange={handleFileChange} />
                   </Button>
                 </CardContent>
               </Card>
@@ -117,7 +146,7 @@ export function ProductUpload() {
               <p className="text-base font-semibold">Ерөнхий ангилал</p>
               <SelectTrigger className="w-full bg-[#D6D8DB] border-solid border border-black">
                 <SelectValue placeholder="Сонгох" className="" />
-                <SelectValue placeholder="Сонгох" className="" />
+
               </SelectTrigger>
               <SelectContent className="">
                 <SelectGroup>
@@ -155,12 +184,10 @@ export function ProductUpload() {
             </div>
             <Button variant="outline" className="rounded-xl max-w-[118px] shadow-lg">
               <p className="text-sm font-semibold px-4 py-2">Төрөл нэмэх</p>
-              <p className="text-sm font-semibold px-4 py-2">Төрөл нэмэх</p>
             </Button>
           </div>
           <div className="bg-white p-6 flex flex-col gap-2 rounded-lg">
             <p className="text-base font-semibold">Таг</p>
-            <Input placeholder="Таг нэмэх..." className="bg-[#D6D8DB] p-2 border-solid border border-black" />
             <Input placeholder="Таг нэмэх..." className="bg-[#D6D8DB] p-2 border-solid border border-black" />
             <p className="text-sm font-normal text-[#5E6166] mb-9">Санал болгох: Гутал , Цүнх , Эмэгтэй </p>
           </div>
@@ -168,7 +195,7 @@ export function ProductUpload() {
       </div>
       <div className="flex gap-6 justify-end px-10 mb-28">
         <Button variant={"outline"} className="p-6 shadow-lg"><p className="text-base font-semibold">Ноорог</p></Button>
-        <Button className="p-6 shadow-lg"><p className="text-base font-semibold" onClick={() => postProduct()}>Нийтлэх</p></Button>
+        <Button className="p-6 shadow-lg"><p className="text-base font-semibold" onClick={() => UploadFile()}>Нийтлэх</p></Button>
       </div>
     </div>
   );
