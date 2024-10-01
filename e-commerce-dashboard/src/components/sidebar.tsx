@@ -12,41 +12,41 @@ export function SideBAr() {
   const router = useRouter();
   return (
     <div className="bg-[#FFFFFF] w-[250px] flex flex-col gap-1 py-10">
-      <button
+      <div
         onClick={() => router.push("/auth/dashboard")}
-        className="flex gap-4 text-headerBlack text-base hover:bg-gray-300 p-3"
+        className="flex gap-4 text-headerBlack text-base hover:bg-gray-300 p-3 hover:cursor-pointer"
       >
         <LayoutGrid size={24} strokeWidth={3} absoluteStrokeWidth />
         Хяналтын самбар
-      </button>
-      <button
+      </div>
+      <div
         onClick={() => router.push("/auth/order")}
-        className="flex gap-4 text-headerBlack text-base hover:bg-gray-300 p-3"
+        className="flex gap-4 text-headerBlack text-base hover:bg-gray-300 p-3 hover:cursor-pointer"
       >
         <Clipboard size={24} strokeWidth={3} />
         Захиaлга
-      </button>
-      <button
+      </div>
+      <div
         onClick={() => router.push("/auth/income")}
-        className="flex gap-4 text-headerBlack text-base hover:bg-gray-300 p-3"
+        className="flex gap-4 text-headerBlack text-base hover:bg-gray-300 p-3 hover:cursor-pointer"
       >
         <Tag size={24} strokeWidth={3} absoluteStrokeWidth />
         Орлого
-      </button>
-      <button
+      </div>
+      <div
         onClick={() => router.push("/auth/products")}
-        className="flex gap-4 text-headerBlack text-base hover:bg-gray-300 p-3"
+        className="flex gap-4 text-headerBlack text-base hover:bg-gray-300 p-3 hover:cursor-pointer"
       >
         <NotepadText size={24} strokeWidth={3} />
         Бүтээгдэхүүн
-      </button>
-      <button
+      </div>
+      <div
         onClick={() => router.push("/auth/settings")}
-        className="flex gap-4 text-headerBlack text-base hover:bg-gray-300 p-3"
+        className="flex gap-4 text-headerBlack text-base hover:bg-gray-300 p-3 hover:cursor-pointer"
       >
         <Settings size={24} strokeWidth={3} absoluteStrokeWidth />
         Тохиргоо
-      </button>
+      </div>
     </div>
   );
 }
