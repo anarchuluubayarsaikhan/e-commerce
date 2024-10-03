@@ -17,8 +17,30 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
+import { useState } from "react";
 
-export function ProductUpload({ open }: { open: boolean }) {
+export function ProductUpload() {
+  const [name, SetName] = useState("")
+  const [text, SetText] = useState("")
+  const [barCode, SetBarCode] = useState("")
+  const [category, SetCategory] = useState("")
+
+  function postProduct() {
+    fetch(`http://localhost:4000/postProducts`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: name,
+          text: text,
+          BarCode: barCode,
+        }
+        ),
+        headers: { "Content-type": "application/json; charset=UTF-8" }
+      }
+    )
+  }
+
+
   return (
     <div className="w-full flex flex-col gap-6 bg-primaryGray">
       <div className="flex gap-6">
@@ -26,13 +48,13 @@ export function ProductUpload({ open }: { open: boolean }) {
           <div className="bg-white flex flex-col gap-4 p-6 rounded-xl">
             <div className="flex flex-col gap-2 text-sm font-semibold">
               Бүтээгдэхүүний нэр
-              <Input placeholder="Нэр" className="bg-[#D6D8DB] p-2 border-solid border border-black" />
+              <Input placeholder="Нэр" className="bg-[#D6D8DB] p-2 border-solid border border-black" value={name} onChange={(e) => SetName(e.target.value)} />
             </div>
             <div className="flex flex-col gap-2 text-sm font-semibold">
               Нэмэлт мэдээлэл
               <Textarea
                 placeholder="Гол онцлог, давуу тал, техникийн үзүүлэлтүүдийг онцолсон дэлгэрэнгүй, сонирхолтой тайлбар."
-                className="max-w-lg bg-[#D6D8DB] p-2 border-solid border border-black"
+                className="max-w-lg bg-[#D6D8DB] p-2 border-solid border border-black" value={text} onChange={(e) => SetText(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2 text-sm font-semibold">
@@ -40,7 +62,7 @@ export function ProductUpload({ open }: { open: boolean }) {
               <Input
                 type="number"
                 placeholder="#123456"
-                className="bg-[#D6D8DB] p-2 border-solid border border-black"
+                className="bg-[#D6D8DB] p-2 border-solid border border-black" value={barCode} onChange={(e) => SetBarCode(e.target.value)}
               />
             </div>
           </div>
@@ -91,10 +113,11 @@ export function ProductUpload({ open }: { open: boolean }) {
         </div>
         <div className="flex flex-1 flex-col gap-6 pr-6 py-6">
           <div className="w-full bg-white p-6 rounded-lg flex flex-col gap-4">
-            <Select>
+            <Select onValueChange={SetCategory}>
               <p className="text-base font-semibold">Ерөнхий ангилал</p>
               <SelectTrigger className="w-full bg-[#D6D8DB] border-solid border border-black">
-                <SelectValue placeholder="Сонгох" className=""/>
+                <SelectValue placeholder="Сонгох" className="" />
+                <SelectValue placeholder="Сонгох" className="" />
               </SelectTrigger>
               <SelectContent className="">
                 <SelectGroup>
@@ -131,19 +154,21 @@ export function ProductUpload({ open }: { open: boolean }) {
               </Button>
             </div>
             <Button variant="outline" className="rounded-xl max-w-[118px] shadow-lg">
-             <p className="text-sm font-semibold px-4 py-2">Төрөл нэмэх</p>
+              <p className="text-sm font-semibold px-4 py-2">Төрөл нэмэх</p>
+              <p className="text-sm font-semibold px-4 py-2">Төрөл нэмэх</p>
             </Button>
           </div>
           <div className="bg-white p-6 flex flex-col gap-2 rounded-lg">
             <p className="text-base font-semibold">Таг</p>
-            <Input placeholder="Таг нэмэх..." className="bg-[#D6D8DB] p-2 border-solid border border-black"/>
+            <Input placeholder="Таг нэмэх..." className="bg-[#D6D8DB] p-2 border-solid border border-black" />
+            <Input placeholder="Таг нэмэх..." className="bg-[#D6D8DB] p-2 border-solid border border-black" />
             <p className="text-sm font-normal text-[#5E6166] mb-9">Санал болгох: Гутал , Цүнх , Эмэгтэй </p>
           </div>
         </div>
       </div>
       <div className="flex gap-6 justify-end px-10 mb-28">
         <Button variant={"outline"} className="p-6 shadow-lg"><p className="text-base font-semibold">Ноорог</p></Button>
-        <Button className="p-6 shadow-lg"><p className="text-base font-semibold">Нийтлэг</p></Button>
+        <Button className="p-6 shadow-lg"><p className="text-base font-semibold" onClick={() => postProduct()}>Нийтлэх</p></Button>
       </div>
     </div>
   );
