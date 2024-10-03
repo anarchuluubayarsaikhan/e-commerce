@@ -27,14 +27,22 @@ export function ProductUpload() {
     name: "",
     information: "",
     barCode: "",
+    value: "",
+    quantity: "",
+    addTag: "",
+    Category: [],
   };
 
   const validationSchema = yup.object({
     name: yup
       .string(),
     information: yup
+      .string(),
+    Category: yup
       .string()
+      .oneOf(["Эмэгтэй", "Эpэгтэй"])
   });
+
 
   function onSubmit() {
     return;
@@ -50,6 +58,7 @@ export function ProductUpload() {
     validationSchema,
   });
 
+  console.log(formik.values.Category);
   function postProduct() {
     fetch(`http://localhost:4000/postProducts`,
       {
@@ -58,6 +67,8 @@ export function ProductUpload() {
           name: formik.values.name,
           text: formik.values.information,
           BarCode: formik.values.barCode,
+          quantity: formik.values.quantity,
+          addTag: formik.values.addTag,
         }
         ),
         headers: { "Content-type": "application/json; charset=UTF-8" }
@@ -101,13 +112,13 @@ export function ProductUpload() {
             <div className="bg-white flex flex-col gap-4 p-6 rounded-xl">
               <div className="flex flex-col gap-2 text-sm font-semibold">
                 Бүтээгдэхүүний нэр
-                <Input placeholder="Нэр" className="bg-[#D6D8DB] p-2 border-solid border border-black" value={formik.values.name} onChange={formik.handleChange} />
+                <Input placeholder="Нэр" className="bg-[#D6D8DB] p-2 border-solid border border-black" value={formik.values.name} id="name" onChange={formik.handleChange} />
               </div>
               <div className="flex flex-col gap-2 text-sm font-semibold">
                 Нэмэлт мэдээлэл
                 <Textarea
                   placeholder="Гол онцлог, давуу тал, техникийн үзүүлэлтүүдийг онцолсон дэлгэрэнгүй, сонирхолтой тайлбар."
-                  className="max-w-lg bg-[#D6D8DB] p-2 border-solid border border-black" value={formik.values.information} onChange={formik.handleChange}
+                  className="max-w-lg bg-[#D6D8DB] p-2 border-solid border border-black" value={formik.values.information} id="information" onChange={formik.handleChange}
                 />
               </div>
               <div className="flex flex-col gap-2 text-sm font-semibold">
@@ -115,7 +126,7 @@ export function ProductUpload() {
                 <Input
                   type="number"
                   placeholder="#123456"
-                  className="bg-[#D6D8DB] p-2 border-solid border border-black" value={formik.values.barCode} onChange={formik.handleChange}
+                  className="bg-[#D6D8DB] p-2 border-solid border border-black" value={formik.values.barCode} id="barcode" onChange={formik.handleChange}
                 />
               </div>
             </div>
@@ -163,28 +174,29 @@ export function ProductUpload() {
           </div>
           <div className="flex flex-1 flex-col gap-6 pr-6 py-6">
             <div className="w-full bg-white p-6 rounded-lg flex flex-col gap-4">
-              <Select>
+              <Select name="Category">
                 <p className="text-base font-semibold">Ерөнхий ангилал</p>
                 <SelectTrigger className="w-full bg-[#D6D8DB] border-solid border border-black">
                   <SelectValue placeholder="Сонгох" className="" />
-
                 </SelectTrigger>
                 <SelectContent className="">
                   <SelectGroup>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="Эмэгтэй">Эмэгтэй</SelectItem>
+                    <SelectItem value="Эpэгтэй">Эpэгтэй</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <Select>
+              <Select name="SubCategory">
                 <p className="text-base font-semibold">Дэд ангилал</p>
                 <SelectTrigger className="w-full bg-[#D6D8DB] border-solid border border-black">
                   <SelectValue placeholder="Сонгох" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
+                    <SelectItem value="цүнх">цүнх</SelectItem>
+                    <SelectItem value="гутал">гутал</SelectItem>
+                    <SelectItem value="цамц">цамц</SelectItem>
+                    <SelectItem value="цаг">цаг</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
