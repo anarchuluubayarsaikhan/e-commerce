@@ -1,13 +1,12 @@
 "use client";
 
 import * as yup from "yup";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Field, Form, Formik, useFormik } from "formik";
 
 import { Button } from "./ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Carousel, CarouselContent } from "@/components/ui/carousel";
 import {
   Select,
   SelectContent,
@@ -48,17 +47,28 @@ export function ProductUpload() {
     });
   }
 
+  const [image, setImage] = useState<FileList | null>(null)
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event?.currentTarget.files;
     console.log(files);
-    if (files) uploadFile(files[0]);
+    if (files) setImage(files)
   };
+  const arrayofimmages = Array.from(image ?? [])
+  const setUrl: string[] = []
 
-  function uploadFile(image: string | File) {
+
+  arrayofimmages.forEach((img) => {
+    const url = URL.createObjectURL(img)
+    setUrl.push(url)
+  })
+  console.log(setUrl);
+
+  function uploadFile() {
     if (!image) return;
     const formData = new FormData();
-    formData.append("image", image);
-    console.log(image);
+    Array.from(image ?? []).forEach((file) => formData.append("image", file, file.name))
+
     fetch(`http://localhost:4000/uploadfile`, {
       method: "POST",
       body: formData,
@@ -66,15 +76,15 @@ export function ProductUpload() {
       .then((res) => res.json())
       .then((data) => console.log(data));
   }
+  console.log(image);
 
-  // function UploadImage(event: ChangeEvent<HTMLInputElement>) {
-  //   handleFileChange(event);
-  //   // UploadFile();
-  // }
+  function uploadImage(event: ChangeEvent<HTMLInputElement>) {
+    handleFileChange(event);
+  }
 
   const onSubmit = (values: any, actions: any) => {
     console.log({ values, actions });
-    alert(JSON.stringify(values, null, 2));
+    uploadFile()
     actions.setSubmitting(false);
     postProduct();
   };
@@ -126,24 +136,14 @@ export function ProductUpload() {
                   />
                 </div>
               </div>
-              <Carousel className="w-full max-w-xl box-border rounded-xl p-6 flex flex-col gap-4 bg-white">
+              <div className="w-full max-w-xl box-border rounded-xl p-6 flex flex-col gap-4 bg-white">
                 <p className="text-lg font-semibold">Бүтээгдэхүүний зураг</p>
-                <CarouselContent className="flex gap-2">
-                  <Card className="w-[125px] h-[125px] rounded-xl border-dashed border-2 ">
-                    <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-2xl font-semibold"></span>
-                    </CardContent>
-                  </Card>
-                  <Card className="w-[125px] h-[125px] rounded-xl border-dashed border-2">
-                    <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-2xl font-semibold"></span>
-                    </CardContent>
-                  </Card>
-                  <Card className="w-[125px] h-[125px] rounded-xl border-dashed border-2">
-                    <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <span className="text-2xl font-semibold"></span>
-                    </CardContent>
-                  </Card>
+                <div className="flex gap-2">
+                  {setUrl.map((a) =>
+                    <div className="flex w-[125px] h-[125px] rounded-xl border-dashed border-2 overflow-hidden">
+                      <img src={a} className="flex aspect-square items-center justify-center w-full h-full object-cover" />
+                    </div>
+                  )}
                   <Card className="w-[125px] h-[125px] rounded-xl bg-white flex items-center justify-center">
                     <CardContent className="w-full flex items-center justify-center p-6">
                       <div className="rounded-full w-[32px] h-[32px] relative">
@@ -151,6 +151,7 @@ export function ProductUpload() {
                           +
                         </span>
                         <Input
+                          multiple
                           type="file"
                           className="opacity-0"
                           onChange={handleFileChange}
@@ -158,8 +159,8 @@ export function ProductUpload() {
                       </div>
                     </CardContent>
                   </Card>
-                </CarouselContent>
-              </Carousel>
+                </div>
+              </div>
               <div className="grid grid-cols-2 gap-4 p-6 bg-white rounded-xl">
                 <div className="flex flex-col gap-2 text-base font-semibold">
                   Үндсэн үнэ
@@ -266,12 +267,12 @@ export function ProductUpload() {
             <Button variant={"outline"} className="p-6 shadow-lg" type="button">
               <p className="text-base font-semibold">Ноорог</p>
             </Button>
-            <Button type="submit" className="p-6 shadow-lg">
+            <Button type="submit" className="p-6 shadow-lg" >
               <p className="text-base font-semibold">Нийтлэх</p>
             </Button>
           </div>
         </Form>
       </Formik>
-    </div>
+    </div >
   );
 }
