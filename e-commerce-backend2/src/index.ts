@@ -34,14 +34,13 @@ app.get('/', (req, res) => {
 //   }
 // })
 
-app.post('/uploadfile', multer.single("image"), async (req: Request, res: Response
+app.post('/uploadfile', multer.array("image"), async (req: Request, res: Response
 ) => {
   if (!req.file) {
     return
   }
   try {
     const b64 = Buffer.from(req.file?.buffer).toString('base64')
-
     const dataURI = `data:${req.file.mimetype};base64,${b64}`
     const uploaderRes = await handleUpload(dataURI);
     res.status(200).json(uploaderRes)
@@ -50,7 +49,6 @@ app.post('/uploadfile', multer.single("image"), async (req: Request, res: Respon
   catch (error) {
     console.log(error)
   }
-
 })
 
 app.listen(port, () => {
