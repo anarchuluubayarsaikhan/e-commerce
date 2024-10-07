@@ -1,3 +1,4 @@
+import { Header } from "@/components/header";
 import { SideBAr } from "@/components/sidebar";
 
 export default function AuthLayout({
@@ -7,10 +8,14 @@ export default function AuthLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex gap-10">
-        <SideBAr />
-        <main className="w-[calc(100%-250px)] p-5 bg-white">{children}</main>
+      <body>
+        <Header />
+        <div className="flex ">
+          <SideBAr />
+          <main className="w-[calc(100%-250px)] p-5 bg-white">{children}</main>
+        </div>
       </body>
+
     </html>
   );
 }

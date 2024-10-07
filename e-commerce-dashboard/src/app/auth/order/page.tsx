@@ -1,5 +1,6 @@
 import { OrderTabs } from "./OrderTabs";
 import { OrderTable } from "./OrderTable";
+import { Header } from "@/components/header";
 
 const OrderPage = () => {
   return (
