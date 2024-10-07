@@ -18,21 +18,21 @@ app.get('/', (req, res) => {
   res.send('Hello, TypeScript with Express123!');
 });
 
-// app.post('/postProducts', async (req: Request, res: Response) => {
-//   try {
-//     const { name, text, barCode } = req.body
-//     const postProducts = await postProduct.create({
-//       name: name,
-//       text: text,
-//       BarCode: barCode
-//     })
-//     console.log(postProducts)
-//     res.send(postProducts);
-//   } catch (error) {
-//     console.error(error)
-//     res.sendStatus(404)
-//   }
-// })
+app.post('/postProducts', async (req: Request, res: Response) => {
+  try {
+    const { name, text, barCode } = req.body
+    const postProducts = await postProduct.create({
+      name: name,
+      text: text,
+      BarCode: barCode
+    })
+    console.log(postProducts)
+    res.send(postProducts);
+  } catch (error) {
+    console.error(error)
+    res.sendStatus(404)
+  }
+})
 
 app.post('/uploadfile', multer.array("image"), async (req: Request, res: Response
 ) => {
