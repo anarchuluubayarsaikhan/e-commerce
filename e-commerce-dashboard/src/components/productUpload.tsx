@@ -38,7 +38,7 @@ export function ProductUpload() {
       method: "POST",
       body: JSON.stringify({
         name: formik.values.name,
-        text: formik.values.information,
+        information: formik.values.information,
         BarCode: formik.values.barCode,
         quantity: formik.values.quantity,
         addTag: formik.values.addTag,
