@@ -11,14 +11,14 @@ export type Productdetail = {
     name: string,
     information: string,
     barCode: string,
-    imageurl:string,
+    imageurl:string[],
     price: number,
     leftquantity: number,
     category:string,
     subcategory:string,
     addTag: string,
-    color: string,
-    size:string
+    color: string[],
+    size:string[]
 }
 
 type Props = {
@@ -69,12 +69,12 @@ export function UserCardIndex({ index, productdetail }: Props) {
                 alt="Image of product"
                 width={508}
                 height={331}
-                src={productdetail.imageurl}
+                src={productdetail.imageurl[0]}
                 className={`w-full aspect-video object-cover rounded-[16px] hover:transform hover:scale-125 ${
                   index == 6 || index == 7 ? "min-h-[692px]" : "h-full"
                 } hover:duration-1000`}
               />
-              <button className="absolute top-4 right-4"  onClick={()=> saveproduct(productdetail._id, productdetail.imageurl, productdetail.price, productdetail.information)}>
+              <button className="absolute top-4 right-4"  onClick={()=> saveproduct(productdetail._id, productdetail.imageurl[0], productdetail.price, productdetail.information)}>
                 <Heart
                   strokeWidth={1}
                   className={` ${

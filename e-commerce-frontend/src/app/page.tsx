@@ -1,11 +1,9 @@
-import { Header } from "@/components/header";
-import { Listitem } from "@/components/sidebar";
+import { Filterbycategory } from "@/components/filterbycategory";
 
 export default function Home() {
   return (
     <div className="max-w-[1440px] mx-auto">
-      <Header />
-      <Listitem />
+      <Filterbycategory/>
     </div>
   );
 }
