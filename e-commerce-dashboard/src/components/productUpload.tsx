@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "./ui/textarea";
+import { Check } from "lucide-react";
 
 const validationSchema = yup.object({
   name: yup.string(),
@@ -31,10 +32,10 @@ export function ProductUpload() {
   const [alltypes, setAlltypes] = useState<string[]>(["Өнгө","Размер"])
   const [subtypes, setSubtypes] = useState(false)
   const [imageurl, setImageurl] = useState([])
-  const [color, setColor] = useState<String[]>([])
-  const [size, setSize] = useState<String[]>([])
-  console.log (color, size)
-
+  console.log(imageurl)
+  const [allsize, setSize] = useState("")
+  const [checkedColor, setCheckedcolor] = useState("")
+  console.log(allsize)
   const initialValues = {
     name: "",
     information: "",
@@ -58,18 +59,71 @@ export function ProductUpload() {
   ]
 
   const subcategories = [
-    {name: "цүнх",
-    value: "цүнх"
+    {name: "Малгай",
+    value: "Малгай"
     },
-    {name: "гутал",
-    value: "гутал"
+    {name: "Усны сав",
+    value: "Усны сав"
     },
-    {name: "цамц",
-    value: "цамц"
+    {name: "T-shirt",
+    value: "T-shirt"
     },
-    {name: "цаг",
-    value: "цаг"
+    {name: "Hoodie",
+    value: "Hoodie"
     },
+    {name: "Tee",
+    value: "Tee"
+    },
+    {name: "Tee",
+    value: "Цүнх"
+    },
+  ]
+
+  const colors = [
+    {colorname: "улаан",
+      value: "#FF0000",
+      
+    },
+    {colorname: "ногоон",
+      value: "#00ff00"
+    },
+    {colorname: "нил ягаан",
+      value: "#A020F0"
+    },
+    {colorname: "бор",
+      value: "#964B00"
+    },
+    {colorname: "цагаан",
+      value: "#FFFFFF"
+    },
+    {colorname: "улбар шар",
+      value: "#FFA500"
+    },
+    {colorname: "цэнхэр",
+      value: "#0000FF"
+    },
+    {colorname: "ягаан",
+      value: "#FFC0CB"
+    },
+    {colorname: "саарал",
+      value: "#808080"
+    },
+    {colorname: "шар",
+      value: "#FFFF00"
+    },
+    {colorname: "хар",
+      value: "#000000"
+    },
+  ]
+
+  const sizes = [
+    {sizename: "Free"},
+    {sizename: "S"},
+    {sizename: "M"},
+    {sizename: "L"},
+    {sizename: "XL"},
+    {sizename: "2XL"},
+    {sizename: "3XL"}
   ]
 
   function postProduct() {
@@ -83,9 +137,9 @@ export function ProductUpload() {
         imageurl:imageurl,
         leftquantity: formik.values.leftquantity,
         category:category,
+        color:allcolors,
+        size: allsizes,
         subcategory:subcategory,
-        color: color,
-        size: size, 
         addTag: formik.values.addTag,
       }),
       headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -128,10 +182,7 @@ export function ProductUpload() {
     onSubmit,
     validationSchema,
   });
-
-  function showinput(){
-    setAddtypes(true)
-  }
+  
   function addtype() {
    setAlltypes(type=> [...type,formik.values.type])
   }
@@ -143,9 +194,18 @@ export function ProductUpload() {
 
   const randomnumber = Math.floor(Math.random()*899999)+100000
 
-  function addtoarray() {
-    setColor(col=> [...col, formik.values.Өнгө])
-    setSize(col=> [...col, formik.values.Размер])
+  const [allcolors, setAllcolors] = useState<string[]>([])
+  const [allsizes, setAllsizes] = useState<string[]>([])
+  console.log(allcolors)
+  console.log(allsizes)
+
+  function pushtocolorarray() {
+    setAllcolors(color=>[...color,checkedColor])
+  }
+  
+
+  function pushtosizearray() {
+    setAllsizes(size => [...size, allsize])
   }
   return (
     <div className="w-full flex flex-col gap-6 bg-primaryGray">
@@ -274,34 +334,37 @@ export function ProductUpload() {
               </div>
               <div className="bg-white p-6 flex flex-col gap-6 rounded-lg">
                 <p className="text-lg font-semibold">Төрөл</p>
-                {alltypes.map((type)=> 
                  <div className="flex gap-6 items-center">
-                 <p>{type}</p>
-                 <Button
-                   type="button"
-                   variant="secondary"
-                   className="rounded-full w-[32px] h-[32px]"
-                   onClick={() => addsubtypes()}
-                 >
-                   +
-                 </Button>
-                 <div className={`${subtypes? "block":"hidden"} flex gap-2`}>
-                      <Input onChange={formik.handleChange} id={type}></Input>
-                      <Button onClick={() => addtoarray()}>Нэмэх</Button>
-                 </div>
-               </div>
-                )}
-                <Button
-                  variant="outline"
-                  type="button"
-                  className="rounded-xl max-w-[118px] shadow-lg"
-                  onClick={()=> showinput()}
-                >
-                  <p className="text-sm font-semibold px-4 py-2">Төрөл нэмэх</p>
-                </Button>
-                <div className="flex gap-2">
-                  <Input id="type" placeholder="Төрөл оруулна уу" name="type"  onChange={formik.handleChange} className={`${addtypes? "block" : "hidden"}`}></Input>
-                  <Button className={`${addtypes? "block" : "hidden"}`} onClick={()=> addtype()}>Нэмэх</Button>
+                    <p>Өнгө</p>
+                    <div className="flex gap-1">
+                      {colors.map ((color) => 
+                        <button type="button" onClick={() => setCheckedcolor(color.colorname)} className={`rounded-full border h-6 w-6`} style={{backgroundColor:color.value}}><Check size={16} strokeWidth={1.5} className={`${checkedColor === color.colorname? "block":"hidden"}`}/></button>
+                      )}
+                    </div>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      className="rounded-full w-[32px] h-[32px]"
+                      onClick={()=>pushtocolorarray()}
+                    >
+                      +
+                    </Button>
+                </div>
+                <div className="flex gap-6 items-center">
+                    <p>Хэмжээ</p>
+                    <div className="flex gap-1">
+                      {sizes.map ((size) => 
+                      <div className={`rounded-full border p-4 text-center text-sm hover:cursor-pointer`} style={size.sizename===allsize?{backgroundColor:"#808080"}:{color:""}} onClick={()=> setSize(size.sizename)}>{size.sizename}</div>
+                      )}
+                    </div>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      className="rounded-full w-[32px] h-[32px]"
+                      onClick={() => pushtosizearray()}
+                    >
+                      +
+                    </Button>
                 </div>
               </div>
               <div className="bg-white p-6 flex flex-col gap-2 rounded-lg">
@@ -320,7 +383,9 @@ export function ProductUpload() {
             </div>
           </div>
           <div className="flex gap-6 justify-end px-10 mb-28">
-           
+            <Button variant={"outline"} className="p-6 shadow-lg" type="button">
+                <p className="text-base font-semibold">Ноорог</p>
+            </Button>
             <Button type="submit" className="p-6 shadow-lg" >
               <p className="text-base font-semibold">Нийтлэх</p>
             </Button>
@@ -328,9 +393,6 @@ export function ProductUpload() {
         </Form>
        
       </Formik>
-      <Button variant={"outline"} className="p-6 shadow-lg" type="button">
-              <p className="text-base font-semibold">Ноорог</p>
-          </Button>
     </div >
   );
 }
