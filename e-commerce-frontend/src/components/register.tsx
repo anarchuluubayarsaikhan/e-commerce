@@ -8,23 +8,34 @@ import { postFetch } from "@/utils/fetcher";
 import { Formik, FormikErrors, useFormik, } from "formik";
 import { object, string, number, date, InferType, ref }from "yup";
 import * as yup from "yup";
+import Link from "next/link";
+
 
 
 export function Register() {
-  const [containsuppercase, setContainsuppercase] = useState (false)
-  const [containslowercase, setContainslowercase] = useState (false)
   const [lenght, setLenght] = useState (false)
-  const [containsnumber, setContainsnumber] = useState (false)
-  const [containsspecialchar, setSpecialchar] = useState (false)
+  const [password, setPassword] = useState ("")
 
-  console.log (containslowercase)
-  
+  const passwordLenghtIsValid = password.length >8
+  const containsUppercase = /[A-Z]/.test(password)
+  const containsLowercase = /[a-z]/.test(password)
+  const containsNumber = /[0-9]/.test(password)
+  const containsSpecialchar = /[ !@#$%^&*(),.?":{}|<> ]/.test(password)
 
 
 
   function onSubmit() {
-    postFetch("signup", {name: formik.values.name, email: formik.values.email, password: formik.values.password});
+    postFetch("signup", {name: formik.values.name, email: formik.values.email, password: password}).then((res)=>{
+      if (res.ok) {
+        return (window as Window).location = "/login"
+      }
+      else{
+         alert("Try again")
+      }
+    }
+  );
     formik.resetForm()
+    setPassword("")
   }
   
 
@@ -39,30 +50,17 @@ export function Register() {
   const validationSchema = yup.object({
     name: yup.string().min(2,'Хамгийн багадаа 2 үсэг орсон байх').required("Нэрээ оруулна уу"),
     email: yup.string().email("Зөв имэйл хаяг оруулна уу").required("Имэйл хаягаа оруулна уу"),
-    password: yup.string()
-      .min(8, ()=>setLenght(true))
-      .required("Нууц үгээ оруулна уу")
-      .matches(/^(?=.*[a-z])/, ()=> setContainslowercase(true))
-      .matches(/^(?=.*[A-Z])/,()=>  setContainsuppercase(true))
-      .matches(/^(?=.*[0-9])/, ()=> setContainsnumber(true))
-      .matches(
-        /^(?=.*[!@#\$%\^&\*])/,
-        ()=> setSpecialchar(true)
-      ),
     confirmedPassword: 
       yup.string()
-      .oneOf([ref("password")], "Нууц үг ижил биш байна")
+      // .oneOf([ref("password")], "Нууц үг ижил биш байна")
       .required("Нууц үгээ давтан оруулна уу"),
   });
-
-
-
+  const allValid = validationSchema && containsUppercase && containsLowercase && containsNumber&& containsNumber && containsSpecialchar
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema 
   });
-
 
   return (
     <div className="flex flex-col gap-12 items-center">
@@ -106,14 +104,9 @@ export function Register() {
             placeholder="Нууц үг"
             type="password"
             className="rounded-[18px]"
-            value={formik.values.password}
-            onChange={formik.handleChange}
+            value={password} 
+            onChange={(e)=> setPassword (e.target.value)}
           />
-          {  formik.touched.password? 
-            <span className="text-red-500 text-sm text-start">
-              {formik.errors.password}
-            </span> : null
-          }
           <div className="flex flex-col gap-2">
             <Input
               id="confirmedPassword"
@@ -131,22 +124,20 @@ export function Register() {
           </div>
         </div>
         <ul>
-        <li className={`font-normal text-xs list-disc ml-4 `}>
-        {formik.touched.password && lenght? <span className="text-red-500">Хамгийн багадаа 8 үсэг орсон байх</span> : <span>Хамгийн багадаа 8 үсэг орсон байх</span>}
-            
+          <li className={`${passwordLenghtIsValid? "text-green-700":"text-primaryRed"} font-normal text-xs list-disc ml-4`}>
+            Хамгийн багадаа 8 үсэг орсон байх   
+          </li >
+          <li className={`${containsUppercase? "text-green-700":"text-primaryRed"} font-normal text-xs list-disc ml-4`}>
+            Том үсэг орсон байх
           </li>
-          <li className={`font-normal text-xs list-disc ml-4`}>
-          {formik.touched.password && containsuppercase? <span >Том үсэг орсон байх</span> : <span className="text-red-500">Том үсэг орсон байх</span>}
+          <li className={`${containsLowercase? "text-green-700":"text-primaryRed"} font-normal text-xs list-disc ml-4`}>
+            Жижиг үсэг орсон байх
           </li>
-          <li className={`font-normal text-xs list-disc ml-4`}>
-          {formik.touched.password && containslowercase? <span >Жижиг үсэг орсон байх</span> : <span className="text-red-500">Жижиг үсэг орсон байх</span>}
+          <li className={`${containsNumber? "text-green-700":"text-primaryRed"} font-normal text-xs list-disc ml-4`}>
+            Тоо орсон бай
           </li>
-          <li className={`font-normal text-xs list-disc ml-4`}>
-          {formik.touched.password && containsnumber? <span >Тоо орсон байх</span> : <span className="text-red-500">Тоо орсон байх</span>}
-            
-          </li>
-          <li className={`font-normal text-xs list-disc ml-4`}>
-          {formik.touched.password && containsspecialchar? <span>Тэмдэгт орсон байх</span> : <span className="text-red-500">Тэмдэгт орсон байх</span>}
+          <li className={`${containsSpecialchar?"text-green-700":"text-primaryRed"} font-normal text-xs list-disc ml-4`}>
+            Тэмдэгт орсон бай
           </li>
         </ul>
       </div>
@@ -154,16 +145,21 @@ export function Register() {
       <Button
           className={`rounded-[18px] bg-primaryBlue text-[#FAFAFA] text-sm font-medium hover:bg-blue-700 disabled:opacity-30 `}
           type="submit"
-          disabled={formik.isSubmitting}
+          disabled={!allValid}
         >
           Үүсгэх
         </Button>
         
       </div>
      </form>
-      <Button className="bg-white border-primaryBlue border rounded-[18px] text-primaryBlue text-sm font-medium hover:bg-gray-50 w-[334px] text-center">
+     <Link href="/login">
+        <Button className="bg-white border-primaryBlue border rounded-[18px] text-primaryBlue text-sm font-medium hover:bg-gray-50 w-[334px] text-center" type="button">
             Нэвтрэх
         </Button>
+     </Link>
+       
      </div>
+     
+     
   );
 }

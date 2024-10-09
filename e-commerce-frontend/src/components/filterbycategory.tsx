@@ -3,6 +3,8 @@ import CategoryPage from "@/app/category/page"
 import { Checkbox } from "./ui/checkbox"
 import { useState } from "react"
 import { useQueryState } from 'nuqs'
+import { useSearchParams } from 'next/navigation'
+    
 
 
 const categories = [
@@ -55,6 +57,11 @@ export function Filterbycategory() {
     const [sizearray, setSizearray] = useState<String[]>([])
     const [categoryname, setCategoryName] = useQueryState('category')
     const [sizename, setSizeName] = useQueryState('size')
+    const searchParams = useSearchParams()
+    const categoryvalue = searchParams.get('category')
+    console.log(categoryname)
+    const sizevalue = searchParams.get('size')
+    console.log(sizevalue)
 
     function categoriesarray (labelname:string | "") {
         setCategoryName(labelname)
@@ -76,6 +83,10 @@ export function Filterbycategory() {
         else {
         setSizearray(s => [...s, labelname])
         }
+    }
+
+    function getfilteredproducts () {
+        fetch (`http://localhost:4000/filterdedproducts?category=${categoryvalue}&size=${sizevalue}`)
     }
 
    

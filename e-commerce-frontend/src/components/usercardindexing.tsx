@@ -28,31 +28,26 @@ type Props = {
 
 
 
-export function UserCardIndex({ index, productdetail }: Props) {
+export function UserCardIndex({ index, productdetail}: Props) {
   const [filled, setFilled] = useState(false);
+  const [favoriteproducts, setFavoriteproducts] = useState<Object[]>([])
   console.log(productdetail)
-
+  
   function saveproduct(_id:string,imageurl:string, price:number,information:string ) {
     setFilled(!filled)
+    
     if (!filled) {
-      fetch (`http://localhost:4000/saveproduct`,{
-        method:"POST",
-        body: JSON.stringify({
-          _id: _id,
-          imageurl: imageurl,
-          information: information,
-          price: price,
-         
-        }),
-        headers: { "Content-type": "application/json; charset=UTF-8" }
+      setFavoriteproducts((fav)=> [...fav, {
+        _id: _id,
+        imageurl: imageurl,
+        information: information,
+        price: price,}])
+        localStorage.setItem("favoriteproducts", JSON.stringify(favoriteproducts))
       }
-      )
-    }
     else { 
-        fetch (`http://localhost:4000/saveproduct${_id}`,{
-        method:"DELETE"
-      }
-    )
+         const removefromlocalstorage= favoriteproducts.filter((fav)=>fav._id !== _id)
+         setFavoriteproducts(removefromlocalstorage)
+         localStorage.setItem("favoriteproducts", JSON.stringify(favoriteproducts))
   }
 }
   return (
