@@ -1,3 +1,4 @@
+"use client"
 import {
   InputOTP,
   InputOTPGroup,
@@ -8,6 +9,29 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export default function Confirm() {
+  function passConfirm() {
+    fetch ("http://localhost:4000/passconfim",{
+            method: "POST",
+            body: JSON.stringify({
+                
+            }
+            ),
+            headers: { "Content-type": "application/json; charset=UTF-8" },
+        }
+        ).then((res)=> {
+            if(res.ok) {
+                (window as Window).location = "/confirm"
+            }
+            else if(res.status === 401) {
+                (window as Window).location = "/signup"
+            }
+            else {
+                (window as Window).location = "/forgetpass"
+            }
+        }
+            
+        )
+  }
   return (
     <div className="flex flex-col items-center gap-5 py-20">
       <Image src="" alt="message picture" />
@@ -32,6 +56,7 @@ export default function Confirm() {
 
       <Button
         className="w-full max-w-[334px] mx-auto bg-[#2563EB] rounded-full"
+        onClick={()=> passConfirm()}
       >
          Баталгаажуулах
       </Button>
