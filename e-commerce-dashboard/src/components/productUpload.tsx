@@ -51,31 +51,28 @@ export function ProductUpload() {
 
   const categories = [
     {name: "Эрэгтэй",
-     value: "эр"
+     value: "male"
     },
     {name: "Эмэгтэй",
-    value: "эм"
+    value: "female"
     }
   ]
 
   const subcategories = [
-    {name: "Малгай",
-    value: "Малгай"
+    {name: "Хүрэм",
+    value: "coat"
     },
-    {name: "Усны сав",
-    value: "Усны сав"
+    {name: "Хантааз",
+    value: "jacket"
     },
-    {name: "T-shirt",
-    value: "T-shirt"
+    {name: "Цамц",
+    value: "shirt"
     },
-    {name: "Hoodie",
-    value: "Hoodie"
+    {name: "Өмд",
+    value: "trousers"
     },
-    {name: "Tee",
-    value: "Tee"
-    },
-    {name: "Tee",
-    value: "Цүнх"
+    {name: "Даашинз",
+    value: "dress"
     },
   ]
 
