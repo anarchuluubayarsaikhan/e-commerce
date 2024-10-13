@@ -45,17 +45,22 @@ export function ImageSlider ({productdetails}:{productdetails:Productdetail[]}) 
               stopOnMouseEnter: true
             }),
           ]}>
+            
             <CarouselContent>
-              {productdetails.map ((productdetail)=> 
+            {productdetails.map ((productdetail)=> 
                 <CarouselItem>
-                    <Image src={productdetail.imageurl[0]} alt="TestImage" width={1040} height={446} className="w-full rounded-[16px] h-full aspect-video relative object-cover"/> 
-                    <div className="absolute left-8 bottom-8 ">
-                      <div className="font-normal text-lg text-black">{productdetail.name}</div>
-                      <div className="font-bold text-4xl text-black">{productdetail.price}</div>
-                    </div>
+                  <div className="relative w-full h-full overflow-hidden">
+                    <Image src={productdetail.imageurl[0]} alt="TestImage" width={1040} height={446} className="w-full rounded-[16px] h-full aspect-video object-cover"/> 
+                      <div className="absolute left-8 bottom-8 ">
+                        <div className="font-normal text-lg text-black">{productdetail.name}</div>
+                        <div className="font-bold text-4xl text-black">{productdetail.price}</div>
+                      </div>
+                  </div>
+                    
                 </CarouselItem>
-              )}
+             )}
             </CarouselContent>
+             
         </Carousel>
     )
 }

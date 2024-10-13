@@ -17,20 +17,22 @@ export function Logincomponent() {
       password: formik.values.password,
     })
       .then((res) => {
-        if (res.status===200) {     
+        if (res.ok) {     
           (window as Window).location = "/"
           return (res.json())
         }
-        else if(res.status===401 && res.statusText==="Wrong password") {
-          return alert ("You are not authenticated. Wrong password")
+        else {
+          alert ("You are not authenticated");
         }
-        else if(res.status===401 && res.statusText==="Wrong email") {
-         return alert ("You are not authenticated. Wrong email")
+      }).then((data) => {
+        if (!data) {
+          return
         }
         else {
-          alert ("You are not authenticated")
+          localStorage.setItem("accessToken", data.token)
         }
-      }).then(({ token }) => localStorage.setItem("accessToken", token));
+        
+      });
        
       
       
@@ -114,7 +116,7 @@ export function Logincomponent() {
           </Button>
           <div className="flex flex-col gap-12">
         <Link
-          href="/forgotpass"
+          href="/forgetpass"
           className="self-center underline text-#71717A text-sm font-normal"
         >
           Нууц үг мартсан

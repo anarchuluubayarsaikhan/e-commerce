@@ -1,8 +1,8 @@
 "use client"
 import CategoryPage from "@/app/category/page"
 import { Checkbox } from "./ui/checkbox"
-import { useState } from "react"
-import { useQueryState } from 'nuqs'
+import { useEffect, useState } from "react"
+import { useQueryState,parseAsArrayOf, parseAsString } from 'nuqs'
 import { useSearchParams } from 'next/navigation'
     
 
@@ -54,8 +54,10 @@ const sizes = [
 
 export function Filterbycategory() {
     const [categoryarray, setCategoryarray] = useState<String[]>([])
+    console.log 
     const [sizearray, setSizearray] = useState<String[]>([])
-    const [categoryname, setCategoryName] = useQueryState('category')
+    const [allcategories, setAllcategories] = useState<String[]>([])
+    const [categoryname, setCategoryName] = useQueryState('category',parseAsArrayOf(parseAsString))
     const [sizename, setSizeName] = useQueryState('size')
     const searchParams = useSearchParams()
     const categoryvalue = searchParams.get('category')
@@ -64,7 +66,6 @@ export function Filterbycategory() {
     console.log(sizevalue)
 
     function categoriesarray (labelname:string | "") {
-        setCategoryName(labelname)
         if (categoryarray.includes(labelname)){
             const filteredcategory = categoryarray.filter ((cat) => cat !==labelname )
             setCategoryarray(filteredcategory)
@@ -72,13 +73,12 @@ export function Filterbycategory() {
         else {
             setCategoryarray(cat => [...cat, labelname])
         }
-        
     }
     function sizearrayadd (labelname:string | "" ) {
         setSizeName(labelname)
-        if (categoryarray.includes(labelname)){
+        if (sizearray.includes(labelname)){
             const filteredsize = sizearray.filter ((size) => size !==labelname )
-            setSizearray(filteredsize)
+        
         }
         else {
         setSizearray(s => [...s, labelname])
@@ -88,6 +88,14 @@ export function Filterbycategory() {
     function getfilteredproducts () {
         fetch (`http://localhost:4000/filterdedproducts?category=${categoryvalue}&size=${sizevalue}`)
     }
+
+    useEffect (()=> {
+        getfilteredproducts ()
+    },[categoryname, sizename]
+        
+    )
+        
+    
 
    
 

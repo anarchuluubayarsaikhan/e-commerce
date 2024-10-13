@@ -4,6 +4,6 @@ export async function fetcherwithtoken (path: string) {
       headers: {
         accessToken: accessToken
       }
-    }).then((res)=> res.json())
+    })
     return data
   }

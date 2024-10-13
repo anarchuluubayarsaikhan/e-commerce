@@ -4,7 +4,8 @@ export async function postfetcherwithtoken (path: string, jsonbody:{}) {
       method: "POST",
       body:JSON.stringify(jsonbody),
       headers: {
-        accessToken: accessToken
+        accessToken: accessToken,
+        "Content-type": "application/json; charset=UTF-8" 
       }
     }).then((res)=> res.json())
     return data

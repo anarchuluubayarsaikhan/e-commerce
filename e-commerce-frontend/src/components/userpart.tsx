@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 
 export function Userpart () {
     return (
-        <div className="flex flex-col gap-[49px]">
+        <div className="flex flex-col gap-[49px] min-w-[620px] ">
             <div className="text-tersiaryBlack text-lg font-bold">Хэрэглэгчийн хэсэг</div>
             <div className="flex flex-col gap-4">
              <div className="grid w-full items-center gap-1.5">

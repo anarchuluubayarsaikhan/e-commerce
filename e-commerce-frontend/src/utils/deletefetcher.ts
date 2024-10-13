@@ -1,9 +1,9 @@
-export function postFetch(path: string, jsonBody: {}) {
+export function deleteFetch(path: string) {
+    const accessToken = localStorage.getItem("accessToken") || ""
     return fetch (`http://localhost:4000/${path}`, {
-      method: "POST",
-      body: JSON.stringify(jsonBody),
+      method: "DELETE",
       headers: {
-        "Content-type": "application/json; charset=UTF-8"
+        accessToken: accessToken
       }
     })
   }

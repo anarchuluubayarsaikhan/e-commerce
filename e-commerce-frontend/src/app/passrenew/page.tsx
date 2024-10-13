@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export function NewPassword({ submit }: { submit: () => void }) {
+export default function NewPassword({ submit }: { submit: () => void }) {
   return (
     <div className="max-w-[334px] mx-auto grid gap-5 py-20">
       <h1 className="text-lg text-[#09090B] font-semibold text-center">
