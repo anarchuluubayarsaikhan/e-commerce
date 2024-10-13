@@ -5,12 +5,44 @@ const postProductsSchema = new Schema({
         type: String,
         required: true,
     },
-    text: {
+    information: {
         type: String,
         required: true,
     },
     barCode: {
         type: Number,
+        required: true,
+    },
+    imageurl: {
+        type: [],
+        required: true,
+    },
+    price: {
+        type: String,
+        required: true,
+    },
+    leftquantity: {
+        type: Number,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    subcategory: {
+        type: String,
+        required: true,
+    },
+    addTag: {
+        type: String,
+        required: true,
+    },
+    color: {
+        type:[],
+        required: true,
+    },
+    size: {
+        type:[],
         required: true,
     },
 })
