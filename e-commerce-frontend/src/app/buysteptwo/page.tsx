@@ -61,7 +61,7 @@ const bankIcons = [
 
 
 
-export function BuyStepThree() {
+export default function BuyStepThree() {
     return (
         <div className=" flex flex-col items-center">
             <div className="w-[687px] bg-slate-400 rounded-2xl flex flex-col gap-4 p-8">

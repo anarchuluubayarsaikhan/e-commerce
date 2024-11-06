@@ -57,43 +57,43 @@ export function Filterbycategory() {
     console.log 
     const [sizearray, setSizearray] = useState<String[]>([])
     const [allcategories, setAllcategories] = useState<String[]>([])
-    const [categoryname, setCategoryName] = useQueryState('category',parseAsArrayOf(parseAsString))
-    const [sizename, setSizeName] = useQueryState('size')
+    const [selectedCategories, setSelectedCategories] = useQueryState('category',parseAsArrayOf(parseAsString))
+    const [selectedSize, setSelectedSize] = useQueryState('size')
     const searchParams = useSearchParams()
     const categoryvalue = searchParams.get('category')
-    console.log(categoryname)
+
     const sizevalue = searchParams.get('size')
     console.log(sizevalue)
 
-    function categoriesarray (labelname:string | "") {
-        if (categoryarray.includes(labelname)){
-            const filteredcategory = categoryarray.filter ((cat) => cat !==labelname )
-            setCategoryarray(filteredcategory)
-        }
-        else {
-            setCategoryarray(cat => [...cat, labelname])
-        }
-    }
-    function sizearrayadd (labelname:string | "" ) {
-        setSizeName(labelname)
-        if (sizearray.includes(labelname)){
-            const filteredsize = sizearray.filter ((size) => size !==labelname )
+    // function categoriesarray (labelname:string | "") {
+    //     if ( categoryname && categoryname.includes(labelname)){
+    //         const filteredcategory = categoryname.filter ((cat) => cat !==labelname )
+    //         setCategoryName(filteredcategory)
+    //     }
+    //     else {
+    //         setCategoryName(cat => [...cat, labelname])
+    //     }
+    // }
+    // function sizearrayadd (labelname:string | "" ) {
+    //     setSizeName(labelname)
+    //     if (sizearray.includes(labelname)){
+    //         const filteredsize = sizearray.filter ((size) => size !==labelname )
         
-        }
-        else {
-        setSizearray(s => [...s, labelname])
-        }
-    }
+    //     }
+    //     else {
+    //     setSizearray(s => [...s, labelname])
+    //     }
+    // }
 
-    function getfilteredproducts () {
-        fetch (`http://localhost:4000/filterdedproducts?category=${categoryvalue}&size=${sizevalue}`)
-    }
+    // function getfilteredproducts () {
+    //     fetch (`http://localhost:4000/filterdedproducts?category=${categoryvalue}&size=${sizevalue}`)
+    // }
 
-    useEffect (()=> {
-        getfilteredproducts ()
-    },[categoryname, sizename]
+    // useEffect (()=> {
+    //     getfilteredproducts ()
+    // },[categoryname, sizename]
         
-    )
+    // )
         
     
 
@@ -106,7 +106,16 @@ export function Filterbycategory() {
             <div className="flex flex-col gap-[17px]">
                 {categories.map((category)=> 
                         <div className="flex gap-2" key={category.labelname}>
-                        <Checkbox id="terms" onClick={()=> categoriesarray(category.labelname)} checked={categoryarray.includes(category.labelname)}/>
+                        <Checkbox id="terms" key={category.id}
+                  
+                    checked={selectedCategories?.includes(category.id)}
+                    onChange={() => {
+                        if (selectedCategories?.includes(category.id)) {
+                            setSelectedCategories(selectedCategories.filter(c => c !== category.id));
+                        } else {
+                            setSelectedCategories([...selectedCategories ?? [], category.id]);
+                        }
+                    }}/>
                         <label
                             htmlFor="terms"
                             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -119,7 +128,7 @@ export function Filterbycategory() {
            </div>
            <div className="flex flex-col gap-4">
            <div className="text-base font-bold text-black">Хэмжээ</div>
-                <div className="flex flex-col gap-[17px]">
+                {/* <div className="flex flex-col gap-[17px]">
                     {sizes.map ((size)=>
                     <div className="flex gap-2" key={size.labelname}>
                     <Checkbox id="terms" onClick={()=> sizearrayadd(size.labelname)} checked={sizearray.includes(size.labelname)}/>
@@ -131,7 +140,7 @@ export function Filterbycategory() {
                     </label>
                         </div>
                     )}
-                </div>
+                </div> */}
                 
                
            </div>

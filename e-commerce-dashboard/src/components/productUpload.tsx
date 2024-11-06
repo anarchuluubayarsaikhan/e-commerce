@@ -18,13 +18,13 @@ import {
 import { Textarea } from "./ui/textarea";
 import { Check } from "lucide-react";
 
+
 const validationSchema = yup.object({
   name: yup.string(),
   information: yup.string(),
 });
 
 export function ProductUpload() {
-
   const [category, setCategory] =useState ("")
   const [subcategory, setSubcategory] =useState ("")
   const [image, setImage] = useState<FileList | null>(null)
@@ -204,6 +204,7 @@ export function ProductUpload() {
   function pushtosizearray() {
     setAllsizes(size => [...size, allsize])
   }
+
   return (
     <div className="w-full flex flex-col gap-6 bg-primaryGray">
       <Formik

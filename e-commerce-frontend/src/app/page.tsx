@@ -9,6 +9,7 @@ import { fetcherwithtoken } from "@/utils/fetcherget";
 import { useEffect, useState } from "react";
 
 
+
 export default function Home() {
   const [productdetails, setProductdetails] = useState<Productdetail[]>([]);
   console.log(productdetails);

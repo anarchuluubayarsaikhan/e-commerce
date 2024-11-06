@@ -26,10 +26,10 @@ export type Productdetail = {
 };
 
 type Props = {
-  proddet: Productdetail
+  product: Productdetail
 };
 
-export function UserCard({proddet}: Props) {
+export function UserCard({product}: Props) {
   const [savedproducts, setSavedproducts] = useState<Savedproducts[]>([]);
 
   const [favoriteproducts, setFavoriteproducts] = useState<Object[]>([]);
@@ -69,14 +69,15 @@ export function UserCard({proddet}: Props) {
 
  
 
-  console.log(selectedid)
-  const [filled, setFilled] = useState(savedproducts.filter((saved) => saved._id===proddet._id).length>0 ? true:false);
+  
+  const [filled, setFilled] = useState(savedproducts.filter((saved) => saved._id===product._id).length>0 ? true:false);
   React.useEffect(() => {
     getsavedproducts();
   }, [filled]);
   function routerpush(_id: string) {
     router.push(`/products/${_id}`);
   }
+  console.log(product._id, savedproducts)
 
   return (
     <div>
@@ -87,17 +88,17 @@ export function UserCard({proddet}: Props) {
           alt="Image of product"
           width={508}
           height={331}
-          src={proddet.imageurl[0]}
+          src={product.imageurl[0]}
           className={`w-full h-full aspect-[3/4] object-cover rounded-[16px] hover:transform hover:scale-125 hover:duration-1000`}
         />
         <button
           className="absolute top-4 right-4"
           onClick={() =>
             saveproduct(
-              proddet._id,
-              proddet.imageurl[0],
-              proddet.price,
-              proddet.information
+              product._id,
+              product.imageurl[0],
+              product.price,
+              product.information
             )
           }
         >
@@ -110,11 +111,11 @@ export function UserCard({proddet}: Props) {
       </div>
       <button
         className="flex flex-col gap-1 "
-        onClick={() => routerpush(proddet._id)}
+        onClick={() => routerpush(product._id)}
       >
-        <p className="font-normal text-base text-black">{proddet.name}</p>
+        <p className="font-normal text-base text-black">{product.name}</p>
         <div className="text-base text-black font-bold">
-          {proddet.price}
+          {product.price}
         </div>
       </button>
     </div>

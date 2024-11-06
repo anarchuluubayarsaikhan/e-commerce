@@ -5,6 +5,10 @@ const bcrypt = require("bcryptjs");
 const getUsers = async (req: Request, res: Response) => {
     try {
       const { name, email, password } = req.body;
+      const isalreadysignedup = await Usermodel.find({email:email})
+      if (isalreadysignedup.length>0) {
+        return res.status(406).send("You already signed up")
+      }
       if (name.lenght< 1){
         return res.status(400).json("Хамгийн багадаа 2 үсэг орсон байх")
       }
@@ -20,9 +24,8 @@ const getUsers = async (req: Request, res: Response) => {
         name,
         email,
         password: hashedPassword,
-      });
+      })
 
-      
       res.sendStatus(200);
     } catch (error) {
       console.error(error);

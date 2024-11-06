@@ -84,7 +84,7 @@ export function UserCardIndex({ index, productdetail}: Props) {
   function routerpush(_id: string) {
     router.push(`/products/${_id}`);
   }
-
+console.log(productdetail._id)
   return (
     <div>
       <div

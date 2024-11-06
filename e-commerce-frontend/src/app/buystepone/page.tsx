@@ -1,4 +1,4 @@
-
+"use client"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,7 +13,7 @@ interface FormValues {
   homeAddress: string;
   nemeltMedeelel: string;
 }
-export function BuySteoTwo() {
+export default function BuySteoTwo() {
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -62,6 +62,7 @@ export function BuySteoTwo() {
   }
   console.log(formik.values);
   return (
+
     <div className="flex flex-col justify-center gap-6 mt-10">
       <div className="flex gap-5">
         <div className="w-[333px] py-6 px-6 flex flex-col gap-4 bg-slate-400 rounded-2xl mb-[230px]">

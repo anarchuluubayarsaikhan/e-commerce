@@ -9,25 +9,41 @@ import { Formik, FormikErrors, useFormik, } from "formik";
 import { object, string, number, date, InferType, ref }from "yup";
 import * as yup from "yup";
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast"
+import { Toast, ToastAction } from "@/components/ui/toast"
+import { Toaster } from "./ui/toaster";
+import { ToastDescription, ToastProvider } from "@radix-ui/react-toast";
 
 
 
 export function Register() {
   const [lenght, setLenght] = useState (false)
   const [password, setPassword] = useState ("")
+  const [confirmedPassword, setConfirmedpassword] = useState ("")
+  const [alreadysignedup, setAlreadysignedup] = useState(false)
+  console.log(confirmedPassword)
+  const { toast } = useToast()
+
 
   const passwordLenghtIsValid = password.length >8
   const containsUppercase = /[A-Z]/.test(password)
   const containsLowercase = /[a-z]/.test(password)
   const containsNumber = /[0-9]/.test(password)
   const containsSpecialchar = /[ !@#$%^&*(),.?":{}|<> ]/.test(password)
+  const validconfirmedPassword = confirmedPassword===password
 
 
 
   function onSubmit() {
+    function havesignedup () {
+      setAlreadysignedup(true)
+    }
     postFetch("signup", {name: formik.values.name, email: formik.values.email, password: password}).then((res)=>{
       if (res.ok) {
         return (window as Window).location = "/login"
+      }
+      else if (res.status === 406){
+        havesignedup()
       }
       else{
          alert("Try again")
@@ -50,17 +66,14 @@ export function Register() {
   const validationSchema = yup.object({
     name: yup.string().min(2,'Хамгийн багадаа 2 үсэг орсон байх').required("Нэрээ оруулна уу"),
     email: yup.string().email("Зөв имэйл хаяг оруулна уу").required("Имэйл хаягаа оруулна уу"),
-    confirmedPassword: 
-      yup.string()
-      // .oneOf([ref("password")], "Нууц үг ижил биш байна")
-      .required("Нууц үгээ давтан оруулна уу"),
-  });
-  const allValid = validationSchema && containsUppercase && containsLowercase && containsNumber&& containsNumber && containsSpecialchar
+  })
+  console.log (validationSchema)
+  const allValid = validationSchema && containsUppercase && containsLowercase && containsNumber&& containsNumber && containsSpecialchar&&validconfirmedPassword
   const formik = useFormik({
     initialValues,
     onSubmit,
     validationSchema 
-  });
+  })
 
   return (
     <div className="flex flex-col gap-12 items-center">
@@ -113,8 +126,8 @@ export function Register() {
               placeholder="Нууц үг давтах"
               type="password"
               className="rounded-[18px]"
-              value={formik.values.confirmedPassword}
-              onChange={formik.handleChange}
+              value={confirmedPassword}
+              onChange={(e)=> setConfirmedpassword(e.target.value)}
             />
             { formik.touched.confirmedPassword? 
               <span className="text-red-500 text-sm text-start">
@@ -157,7 +170,19 @@ export function Register() {
             Нэвтрэх
         </Button>
      </Link>
-       
+        <Button
+          variant="outline"
+          onClick={() => {
+            toast({
+              title: "Signed up user",
+              description: "You have already signed up",
+              action: <ToastAction altText="Try again">Log in</ToastAction>,
+              hidden: true
+            })
+          }}
+        >
+          Show Toast
+        </Button>
      </div>
      
      

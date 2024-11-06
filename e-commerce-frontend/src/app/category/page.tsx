@@ -12,6 +12,7 @@ import { useSearchParams } from 'next/navigation'
 import { string } from "zod";
 
 
+
 const CategoryPage = () => {
   const [productdetails, setProductdetails] = useState<Productdetail[]>([]);
   console.log(productdetails);
@@ -44,6 +45,9 @@ const CategoryPage = () => {
     const [categoryname, setCategoryName] = useQueryState('subcategory',parseAsArrayOf(parseAsString))
     const [sizename, setSizeName] = useQueryState('size',parseAsArrayOf(parseAsString))
     const searchParams = useSearchParams()
+
+    ;
+    
    
 
     let allcategories:string[] = []
@@ -52,17 +56,23 @@ const CategoryPage = () => {
 
 
     function addtocategoriesarray (value:string | "") {
-      if (categoryname !== allcategories) {
-        if (!allcategories.includes(value)){
-          allcategories.push(value)
-          console.log(allcategories)
-        }
-        else {
-          allcategories = allcategories.filter ((allcat)=> allcat !==value)
-         
-        }
-        setCategoryName(allcategories)
+      if (categoryname){
+        setCategoryName([...categoryname, value])
       }
+      else {
+        setCategoryName([value])
+      }
+      // if (categoryname !== allcategories) {
+      //   if (!allcategories.includes(value)){
+      //     allcategories.push(value)
+      //     console.log(allcategories)
+      //   }
+      //   else {
+      //     allcategories = allcategories.filter ((allcat)=> allcat !==value)
+         
+      //   }
+      //   setCategoryName(allcategories)
+      // }
     }
 
 
@@ -139,8 +149,8 @@ const CategoryPage = () => {
           </div>
         </section>
         <div className="grid grid-cols-3 gap-y-28 gap-x-5">
-          {productdetail.map((proddet)=> 
-            <UserCard proddet = {proddet}/>
+          {productdetail.map((product)=> 
+            <UserCard product = {product}/>
           )}
           
         </div>

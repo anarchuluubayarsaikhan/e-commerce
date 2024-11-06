@@ -115,12 +115,6 @@ export function Logincomponent() {
             Нэвтрэх
           </Button>
           <div className="flex flex-col gap-12">
-        <Link
-          href="/forgetpass"
-          className="self-center underline text-#71717A text-sm font-normal"
-        >
-          Нууц үг мартсан
-        </Link>
         <Link href="/signup">
           <Button className="bg-white border-primaryBlue border rounded-[18px] text-primaryBlue text-sm font-medium hover:bg-gray-50 w-[334px] self-center">
             Бүртгүүлэх

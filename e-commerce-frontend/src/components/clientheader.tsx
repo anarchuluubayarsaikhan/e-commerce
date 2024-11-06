@@ -6,6 +6,21 @@ import { ChangeEvent, useState } from "react";
 import { fetcherwithtoken } from "@/utils/fetcherget";
 
 
+import { liteClient as algoliasearch } from 'algoliasearch/lite';
+import { InstantSearch, SearchBox, Hits, Pagination,RefinementList } from 'react-instantsearch';
+
+const searchClient = algoliasearch('MLKXEEH303', 'dc3895feeae585b208d713220c7e40d8')
+
+function Hit({ hit }:{hit:any}) {
+    return (
+      <article>
+        <img src={hit.image} alt={hit.name} />
+        <p>{hit.information}</p>
+        <h1>{hit.addTag}</h1>
+      </article>
+    );
+  }
+
 export function ClientHeaders() {
     const [searchvalue, setSearchvalue] =useState("")
     const [searcheddata, setSearcheddata] =useState("")
@@ -15,8 +30,8 @@ export function ClientHeaders() {
     }
 
     function searchfunction() {
-        // fetcherwithtoken(`search?searchvalue=${searchvalue ?? ""}`).then((res)=> res.json()).then((data)=> setSearcheddata(data))
-        console.log ("hi")
+        fetcherwithtoken(`search?searchvalue=${searchvalue ?? ""}`).then((res)=> res.json()).then((data)=> setSearcheddata(data))
+        console.log (searcheddata)
     }
    
     return (
@@ -40,7 +55,7 @@ export function ClientHeaders() {
                             d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                             clip-rule="evenodd" />
                     </svg>
-                    <input type="text" className="grow text-white" placeholder="Бүтээгдэхүүн хайх" value={searchvalue}  onChange={handlechange} onKeyDown={(e)=> e.key==="Enter" && searchvalue.length>0? searchfunction() : ""}/>
+                        <input type="text" className="grow text-white" placeholder="Бүтээгдэхүүн хайх" value={searchvalue}  onChange={handlechange} onKeyDown={(e)=> e.key==="Enter" && searchvalue.length>0? searchfunction() : ""}/>
                 </label>
                 <div className="flex gap-5 mr-[25px] text-center justify-center items-center">
                     <Link href="/favorites" className="text-[#FFFFFF]">
