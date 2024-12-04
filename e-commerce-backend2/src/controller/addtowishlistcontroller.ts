@@ -9,7 +9,7 @@ const addtowishlistcontroller = async (req:Request, res:Response) => {
         imageurl:imageurl,
         information:information,
         price:price})
-      res.status(200).send("Successfully saved")
+      res.status(200).send(data)
     }
     catch (error){
       console.error(error)

@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
-import connectDB from "./config/db";
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+import connectDB from "../src/config/db";
+// const multer  = require('multer')
+// const upload = multer({ dest: 'uploads/' })
 const app = express();
 const port = 4000;
 const cors = require("cors");
@@ -15,20 +15,20 @@ const db = client.db("ecommerce");
 const collection = db.collection('postProduct')
 
 
-import { signupRouter } from "./router/signuprouter";
-import { loginRouter } from "./router/loginrouter";
-import { uploadRouter } from './router/uploadrouter';
-import { getproductdetailsRouter } from "./router/getproductdetailsrouter";
-import { addtowishlistrouter } from "./router/addtowishlistrouter";
-import { removefromwishlistrouter } from "./router/removefromwishlistrouter";
-import { postproductrouter } from "./router/postproductsrouter";
-import { getfromwishlistrouter } from "./router/getfromwishlistrouter";
-import { getoneproductrouter } from "./router/getoneproductrouter";
-import { productfilterrouter } from "./router/productfilterrouter";
-import { sendOTProuter } from "./router/sendOTProuter";
-import { getsignedupuserrouter } from "./router/getsignedupuserrouter";
-import { postProduct } from "./model/postproductmodel";
-import { checkAuth } from "./controller/checkauth";
+import { signupRouter } from "../src/router/signuprouter";
+import { loginRouter } from "../src/router/loginrouter";
+// import { uploadRouter } from '../src/router/uploadrouter';
+import { getproductdetailsRouter } from "../src/router/getproductdetailsrouter";
+import { addtowishlistrouter } from "../src/router/addtowishlistrouter";
+import { removefromwishlistrouter } from "../src/router/removefromwishlistrouter";
+import { postproductrouter } from "../src/router/postproductsrouter";
+import { getfromwishlistrouter } from "../src/router/getfromwishlistrouter";
+import { getoneproductrouter } from "../src/router/getoneproductrouter";
+import { productfilterrouter } from "../src/router/productfilterrouter";
+import { sendOTProuter } from "../src/router/sendOTProuter";
+import { getsignedupuserrouter } from "../src/router/getsignedupuserrouter";
+import { postProduct } from "../src/model/postproductmodel";
+import { checkAuth } from "../src/controller/checkauth";
 import { searchClient } from '@algolia/client-search'
 
 
@@ -38,7 +38,7 @@ import { searchClient } from '@algolia/client-search'
 app.use(getsignedupuserrouter)
 app.use(signupRouter)
 app.use(loginRouter)
-app.use(uploadRouter)
+// app.use(uploadRouter)
 app.use(getproductdetailsRouter)
 app.use(addtowishlistrouter)
 app.use(removefromwishlistrouter)

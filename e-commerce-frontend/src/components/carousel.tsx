@@ -9,12 +9,12 @@ import Image from "next/image"
 
 import Autoplay from "embla-carousel-autoplay"
 import { useEffect, useRef, useState } from "react"
-import { EmblaPluginType } from 'embla-carousel'
-type PropType = {
-    plugins?: EmblaPluginType[]
-  }
+
+
+
   import { type CarouselApi } from "@/components/ui/carousel"
 import { Productdetail } from "./usercardindexing"
+import { any } from "zod"
 
 export function ImageSlider ({productdetails}:{productdetails:Productdetail[]}) {
     const plugin = useRef(
@@ -39,11 +39,6 @@ export function ImageSlider ({productdetails}:{productdetails:Productdetail[]}) 
     return (
         <Carousel  className="pt-[56px]"  setApi={setApi}
         plugins={[
-            Autoplay({
-              delay: 2000,
-              stopOnInteraction: false,
-              stopOnMouseEnter: true
-            }),
           ]}>
             
             <CarouselContent>

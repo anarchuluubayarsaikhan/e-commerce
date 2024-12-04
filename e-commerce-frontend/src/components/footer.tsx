@@ -12,7 +12,7 @@ import { Logo } from "./logo";
 export const Footerclient = () => {
   return (
     <div className="bg-black">
-      <div className="bg-black text-white px-6 max-w-[1440px] mx-auto">
+      <div className="bg-black text-white px-6  mx-auto">
         <div className="flex justify-between pt-16 items-center">
           <div className="w-[41px] h-[35px]">
             <Logo/>
@@ -35,7 +35,7 @@ export const Footerclient = () => {
 
         <div className="flex items-center h-[1.5px] bg-[#FFFFFF1A] my-11"></div>
 
-        <div className="flex justify-between items-center pb-16">
+        <div className="flex justify-between items-center pb-6 px-6">
           <div className="text-[14px]">© 2024 Ecommerce MN</div>
           <div className="flex gap-7">
             <Link href="https://www.facebook.com/">

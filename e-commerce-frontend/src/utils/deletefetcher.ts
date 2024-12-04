@@ -10,7 +10,7 @@ export function deleteFetch(path: string) {
 
 
   export function getFetch(path: string) {
-     return fetch (`http://localhost:4000/${path}`, {
+     return fetch (process.env.NEXT_PUBLIC_API_URL+`/${path}`, {
       
      })
   }

@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Confirm() {
   function passConfirm() {
-    fetch ("http://localhost:4000/passconfim",{
+    fetch (process.env.NEXT_PUBLIC_API_URL+"/passconfim",{
             method: "POST",
             body: JSON.stringify({
                 

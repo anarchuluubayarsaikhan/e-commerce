@@ -1,6 +1,7 @@
 "use client"
 import { ClientHeaders } from "@/components/clientheader";
-import { Userpart } from "@/components/userpart";
+import { Userpart } from "@/components/userPart";
+
 
 export default function User () {
     return (

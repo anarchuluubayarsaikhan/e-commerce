@@ -3,6 +3,7 @@ import { Heart } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import { deleteFetch } from "@/utils/deletefetcher";
 
 export type Savedproducts ={
     _id: string,
@@ -18,6 +19,17 @@ export function Savedcomponent () {
         fetcherwithtoken("savedproducts").then((res)=> res.json()).then((data)=> setSavedproducts(data))
     }
     useEffect(()=> {getsavedproducts()},[])
+
+    function saveproduct(
+        _id: string
+      ) {
+          deleteFetch(`saveproduct${_id}`).then((res) => {
+            if (res.ok) {
+              return getsavedproducts();
+            }
+          });
+        }
+      
     return (
        
             <div className="flex flex-col gap-4 m-auto min-w-[640px]">
@@ -35,8 +47,14 @@ export function Savedcomponent () {
                     <div className="text-sm font-bold text-[black]">{save.price}</div>
                     <Button className="px-3 py-2 text-white font-medium text-sm bg-[#2563EB] rounded-full hover:bg-blue-950 min-w-[166px]">Сагслах</Button>         
                 </div>
-                <button>
-                    <Heart />
+                <button  onClick={() =>
+                        saveproduct(
+                          save._id
+                        )
+                      }>
+                    <Heart strokeWidth={1}
+                        fill={ "black"}
+                        stroke="black"/>
                 </button>
             </div>
             ))}

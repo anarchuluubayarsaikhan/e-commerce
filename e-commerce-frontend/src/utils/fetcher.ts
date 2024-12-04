@@ -1,5 +1,5 @@
 export function postFetch(path: string, jsonBody: {}) {
-    return fetch (`http://localhost:4000/${path}`, {
+    return fetch (process.env.NEXT_PUBLIC_API_URL+`/${path}`, {
       method: "POST",
       body: JSON.stringify(jsonBody),
       headers: {
@@ -10,7 +10,7 @@ export function postFetch(path: string, jsonBody: {}) {
 
 
   export function getFetch(path: string) {
-     return fetch (`http://localhost:4000/${path}`, {
+     return fetch (process.env.NEXT_PUBLIC_API_URL+`/${path}`, {
       
      })
   }

@@ -31,13 +31,20 @@ type Props = {
 
 export function UserCard({product}: Props) {
   const [savedproducts, setSavedproducts] = useState<Savedproducts[]>([]);
-
-  const [favoriteproducts, setFavoriteproducts] = useState<Object[]>([]);
   const router = useRouter();
+  function getsavedproducts() {
+    fetcherwithtoken("savedproducts")
+      .then((res) => res.json())
+      .then((data) => setSavedproducts(data));
+  }
+  const inWishlist = savedproducts.some((saved) => saved._id===product._id)
   
-
   const [selectedid, setSelectedid] = useState("")
 
+  console.log(inWishlist)
+  React.useEffect(() => {
+    getsavedproducts();
+  }, []);
   function saveproduct(
     _id: string,
     imageurl: string,
@@ -46,50 +53,43 @@ export function UserCard({product}: Props) {
   ) {
     setSelectedid(_id)
 
-    if (!filled) {
+    if (!inWishlist) {
       postfetcherwithtoken("saveproduct", {
         _id: _id,
         imageurl: imageurl,
         information: information,
         price: price,
+      }).then((res)=> {
+        if(res){
+         getsavedproducts()
+         return
+        }
       });
-      setFilled(!filled);
     } else {
-      deleteFetch(`saveproduct${_id}`);
-      setFilled(!filled);
+      deleteFetch(`saveproduct${_id}`).then((res)=> {
+        if(res.ok){
+          return getsavedproducts()
+        }
+      });
     }
   }
-  
-  function getsavedproducts() {
-    fetcherwithtoken("savedproducts")
-      .then((res) => res.json())
-      .then((data) => setSavedproducts(data));
-  }
- 
 
- 
-
-  
-  const [filled, setFilled] = useState(savedproducts.filter((saved) => saved._id===product._id).length>0 ? true:false);
-  React.useEffect(() => {
-    getsavedproducts();
-  }, [filled]);
   function routerpush(_id: string) {
     router.push(`/products/${_id}`);
   }
-  console.log(product._id, savedproducts)
 
   return (
     <div>
       <div
         className={`relative overflow-hidden rounded-[16px] border border-gray-200 aspect-[3/4] w-full h-full max-h-[331px]`}
       >
+        
         <Image
           alt="Image of product"
           width={508}
           height={331}
           src={product.imageurl[0]}
-          className={`w-full h-full aspect-[3/4] object-cover rounded-[16px] hover:transform hover:scale-125 hover:duration-1000`}
+          className={`w-full h-full aspect-[3/4] object-cover rounded-[16px] hover:transform hover:scale-125 hover:duration-1000 hover:cursor-pointer`}
         />
         <button
           className="absolute top-4 right-4"
@@ -104,7 +104,7 @@ export function UserCard({product}: Props) {
         >
           <Heart
             strokeWidth={1}
-            fill={filled ? "black" : "none"}
+            fill={inWishlist? "black" : "none"}
             stroke="black"
           />
         </button>

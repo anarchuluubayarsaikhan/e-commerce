@@ -29,17 +29,30 @@ export type Productdetail = {
 
 type Props = {
   index: number;
-  productdetail: Productdetail
+  productdetail: Productdetail,
+  getproductdetails():void
 };
 
-export function UserCardIndex({ index, productdetail}: Props) {
+export function UserCardIndex({ index, productdetail, getproductdetails}: Props) {
   const [savedproducts, setSavedproducts] = useState<Savedproducts[]>([]);
-
-  const [favoriteproducts, setFavoriteproducts] = useState<Object[]>([]);
   const router = useRouter();
+  function getsavedproducts() {
+    fetcherwithtoken("savedproducts")
+      .then((res) => res.json())
+      .then((data) => setSavedproducts(data));
+  }
+  const inWishlist = savedproducts.some((saved) => saved._id===productdetail._id)
   
   console.log(productdetail._id)
   const [selectedid, setSelectedid] = useState("")
+
+  console.log(inWishlist)
+  React.useEffect(() => {
+    getsavedproducts();
+  }, []);
+  function routerpush(_id: string) {
+    router.push(`/products/${_id}`);
+  }
 
   function saveproduct(
     _id: string,
@@ -49,42 +62,31 @@ export function UserCardIndex({ index, productdetail}: Props) {
   ) {
     setSelectedid(_id)
 
-    if (!filled) {
+    if (!inWishlist) {
       postfetcherwithtoken("saveproduct", {
         _id: _id,
         imageurl: imageurl,
         information: information,
         price: price,
+      }).then((res)=> {
+        if(res){
+         getsavedproducts()
+         return
+        }
       });
-      setFilled(!filled);
     } else {
-      deleteFetch(`saveproduct${_id}`);
-      setFilled(!filled);
+      deleteFetch(`saveproduct${_id}`).then((res)=> {
+        if(res.ok){
+          return getsavedproducts()
+        }
+      });
     }
   }
   
-  function getsavedproducts() {
-    fetcherwithtoken("savedproducts")
-      .then((res) => res.json())
-      .then((data) => setSavedproducts(data));
-  }
- 
 
-  console.log(productdetail);
 
-  console.log(productdetail);
 
- 
 
-  console.log(selectedid)
-  const [filled, setFilled] = useState(savedproducts.filter((saved) => saved._id===productdetail._id).length>0 ? true:false);
-  React.useEffect(() => {
-    getsavedproducts();
-  }, [filled]);
-  function routerpush(_id: string) {
-    router.push(`/products/${_id}`);
-  }
-console.log(productdetail._id)
   return (
     <div>
       <div
@@ -101,7 +103,7 @@ console.log(productdetail._id)
           src={productdetail.imageurl[0]}
           className={`w-full aspect-video object-cover rounded-[16px] hover:transform hover:scale-125 ${
             index == 6 || index == 7 ? "min-h-[692px]" : "h-full"
-          } hover:duration-1000`}
+          } hover:duration-1000 hover:cursor-pointer`}
         />
         <button
           className="absolute top-4 right-4"
@@ -117,7 +119,7 @@ console.log(productdetail._id)
           <Heart
             strokeWidth={1}
             className={` ${index == 6 || index == 7 ? "hidden" : "block"}`}
-            fill={filled ? "black" : "none"}
+            fill={inWishlist? "black" : "none"}
             stroke="black"
           />
         </button>

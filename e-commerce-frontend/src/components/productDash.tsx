@@ -203,7 +203,7 @@ export function ProductDash() {
               </TableBody>
             </Table>
           </div>
-          <ProductUpload open={false} />
+          <ProductUpload/>
         </div>
       </div>
     </div>
